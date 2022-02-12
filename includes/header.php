@@ -42,7 +42,7 @@
         </div>
         <div class="row align-items-center py-2 px-lg-5">
             <div class="col-lg-12 text-center">
-                <a href="" class="navbar-brand d-none d-lg-block">
+                <a href="" class="navbar-brand d-lg-block">
                     <img class="img-fluid" src="img/Logo450x180.png" alt="" srcset="">
                 </a>
             </div>
@@ -50,9 +50,9 @@
     </div>
     <div class="container-fluid p-0 mb-3">
         <nav class="navbar navbar-expand-lg bg-light navbar-light py-2 py-lg-0 px-lg-5">
-            <a href="" class="navbar-brand d-block d-lg-none">
-                <h1 class="m-0 display-5 text-uppercase"><span class="text-primary">News</span>Room</h1>
-            </a>
+            <!--<a href="" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-uppercase"><span class="text-primary">ASSPOL</span></h1>
+            </a>-->
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>

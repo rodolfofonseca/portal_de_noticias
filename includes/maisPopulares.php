@@ -14,7 +14,7 @@
                             <img class="img-fluid w-100" src="img/materias/1.jpg" style="object-fit: cover;">
                             <div class="overlay position-relative bg-light">
                                 <div class="mb-2" style="font-size: 14px;">
-                                    <a href="">Aviação</a>
+                                    <a href="#">Aviação</a>
                                     <span class="px-1">/</span>
                                     <span>
                                         <?php
@@ -22,7 +22,7 @@
                                         ?>
                                     </span>
                                 </div>
-                                <a class="h4" href="single.php">Boeing compra 7,5 milhões de litros...</a>
+                                <a class="h4" href="materia.php">Boeing compra 7,5 milhões de litros...</a>
                                 <p class="m-0">A Boeing anunciou hoje, 7 de fevereiro, um acordo com a EPIC Fuels para a compra de dois milhões de galões </p>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="mb-3 pb-3">
-                    <a href=""><img class="img-fluid w-100" src="img/ads-700x70.jpg" alt=""></a>
+                    <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""></a>
                 </div>
 
                 <div class="row">

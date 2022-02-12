@@ -4,10 +4,10 @@
             <h3 class="m-0">Patrocinadores</h3>
         </div>
         <div class="mb-3 pb-3">
-            <a href=""><img class="img-fluid" src="img/news-500x280-4.jpg" alt=""></a>
+            <a href=""><img class="img-fluid" src="img/anunciante300x300.jpg" alt=""></a>
         </div>
         <div class="mb-3 pb-3">
-            <a href=""><img class="img-fluid" src="img/news-500x280-4.jpg" alt=""></a>
+            <a href=""><img class="img-fluid" src="img/anunciante300x300.jpg" alt=""></a>
         </div>
     </div>
     <div class="pb-3">
@@ -24,8 +24,5 @@
             </div>
             <small>Para anúnciar utilize a aba contato</small>
         </div>
-    </div>
-    <div class="mb-3 pb-3">
-        <a href=""><img src="img/news-300x300-1.jpg" /></a>
     </div>
 </div>

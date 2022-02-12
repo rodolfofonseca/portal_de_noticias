@@ -3,19 +3,19 @@
         <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Patrocinador</h4>
             <div class="d-flex flex-wrap m-n1">
-            <img src="img/news-300x300-1.jpg" />
+            <img src="img/anunciante300x300.jpg" />
             </div>
             </div>
         <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Patrocinador</h4>
             <div class="d-flex flex-wrap m-n1">
-            <img src="img/news-300x300-1.jpg" />
+            <img src="img/anunciante300x300.jpg" />
             </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Patrocinador</h4>
             <div class="d-flex flex-wrap m-n1">
-            <img src="img/news-300x300-1.jpg" />
+            <img src="img/anunciante300x300.jpg" />
             </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-5">
