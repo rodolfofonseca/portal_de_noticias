@@ -17,9 +17,10 @@ require_once 'includes/headerUsuario.php';
                                 </div>
                             </div>
                         </div>
+                        <br/>
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="control-group">
                                     <select name="categoria" id="categoria" class="form-control p-4">
                                         <option value=""></option>
                                     </select>

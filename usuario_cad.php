@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 Swal.fire({
                     icon: 'success',
                     title: 'Sucesso',
-                    text: 'Usuário cadastrado com sucesso'
+                    text: 'Usuário cadastrado com sucesso!'
                 });
             </script>
         <?php
