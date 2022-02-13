@@ -68,7 +68,7 @@ $dataSistema = new Data();
         </div>
         <div class="row align-items-center py-2 px-lg-5">
             <div class="col-lg-12 text-center">
-                <a href="" class="navbar-brand d-lg-block">
+                <a href="dashboard.php" class="navbar-brand d-lg-block">
                     <img class="img-fluid" src="img/Logo450x180.png" alt="" srcset="">
                 </a>
             </div>
@@ -81,18 +81,14 @@ $dataSistema = new Data();
             </button>
             <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.php" class="nav-item nav-link active">Home</a>
-                    <a href="#" class="nav-item nav-link">Cidadania</a>
-                    <a href="#" class="nav-item nav-link">Aviação</a>
-                    <!--
+                    <a href="dashboard.php" class="nav-item nav-link active">Home</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Usuário</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="#" class="dropdown-item">Menu item 1</a>
-                            <a href="#" class="dropdown-item">Menu item 2</a>
-                            <a href="#" class="dropdown-item">Menu item 3</a>
+                            <a href="usuario_cad.php" class="dropdown-item">Cadastro</a>
+                            <a href="usuario_pesq.php" class="dropdown-item">Pesquisa</a>
                         </div>
-                    </div>-->
+                    </div>
                             <a href="$" class="nav-item nav-link">Contato</a>
                 </div>
                 <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
