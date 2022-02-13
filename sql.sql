@@ -5,4 +5,7 @@ create table usuario(
 	senha_usuario text not null
 );
 
-select * from usuario where id_usuario = 1;
+create table categoria(
+	id_categoria serial not null primary key,
+	descricao_categoria varchar(15) not null
+);

@@ -89,6 +89,13 @@ $dataSistema = new Data();
                             <a href="usuario_pesq.php" class="dropdown-item">Pesquisa</a>
                         </div>
                     </div>
+                    <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Matéria</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="materia_cad.php" class="dropdown-item">Cadastro</a>
+                        <a href="materia_pesq.php" class="dropdown-item">Pesquisa</a>
+                    </div>
+                    </div>
                             <a href="$" class="nav-item nav-link">Contato</a>
                 </div>
                 <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">

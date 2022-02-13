@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="row">
             <div class="col-md-12">
                 <div class="contact-form bg-light mb-3" style="padding: 30px;">
-                    <div id="success"></div>
                     <form method="POST" accept="usuario_cad.php">
                         <div class="form-row">
                             <div class="col-md-4">
@@ -75,5 +74,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </div>
 </div>
 <?php
-require_once 'includes/footer.php';
+require_once 'includes/footerUsuario.php';
 ?>

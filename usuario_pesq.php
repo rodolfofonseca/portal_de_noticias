@@ -43,5 +43,5 @@ require_once 'controller/UsuarioCtr.php';
     </div>
 </div>
 <?php
-require_once 'includes/footer.php';
+require_once 'includes/footerUsuario.php';
 ?>
