@@ -1,13 +1,13 @@
 <?php
 require_once 'includes/headerUsuario.php';
-require_once 'controller/CategoriaCtr.php';
-require_once 'controller/modelos/Categoria.php';
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+require_once 'controller/modelos/Menu.php';
+require_once 'controller/MenuCtr.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST)) {
-        $model = new Categoria();
-        $model->setDescricaoCategoria((string)$_POST['descricao']);
-        $model->setApareceMenu((string)$_POST['aparece_menu']);
-        $controller = new CategoriaCtr();
+        $model = new Menu();
+        $controller = new MenuCtr();
+        $model->setDescricaoMenu((string) $_POST['descricao_menu']);
+        $model->setApareceMenu((string) $_POST['aparece_menu_menu']);
         if ($controller->Salvar($model) == true) {
 ?><script>
                 Swal.fire({
@@ -32,37 +32,39 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <div class="container-fluid py-3">
     <div class="container">
         <div class="bg-light py-2 px-4 mb-3">
-            <h3 class="m-0">Cadastro de categorias</h3>
+            <h3 class="m-0">Cadastro de Menu</h3>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="contact-form bg-light mb-3" style="padding: 30px;">
-                    <form method="POST" accept="categoria_cad.php">
+                    <form method="POST" accept="menu_cad.php">
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="descricao">Descrição</label>
-                                    <input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descrição" required data-validation-required-message="Informe a descrição" />
+                                    <label for="descricao_menu">Descrição</label>
+                                    <input type="text" name="descricao_menu" id="descricao_menu" placeholder="Descrição do menu" required data-validation-required-message="Informe a descrição do menu" class="form-control"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="aparece_menu">Aparece no menu</label>
-                                <select name="aparece_menu" id="aparece_menu" class="form-control">
-                                    <option value="S" selected>SIM</option>
-                                    <option value="N">NÃO</option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="aparece_menu_menu">Aparece no menu?</label>
+                                    <select name="aparece_menu_menu" id="aparece_menu_menu" class="form-control">
+                                        <option value="S">SIM</option>
+                                        <option value="N">NÃO</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="control-group">
-                                    <input type="submit" class="btn btn-primary font-weight-semi-bold px-4" value="Cadastrar" />
+                                    <input type="submit" class="btn btn-primary font-weight-semi-bold px-4"  value="Cadastrar" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="reset" class="btn btn-danger forn-weight-semi-bold px4" value="Cancelar" />
+                                    <input type="reset" class="btn btn-danger forn-weight-semi-bold px4" value="Cancelar"/>
                                 </div>
                             </div>
                         </div>
@@ -72,6 +74,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     </div>
 </div>
-<?php
-require_once 'includes/footerUsuario.php';
-?>
+<?php require_once 'includes/footerUsuario.php'; ?>

@@ -83,25 +83,20 @@ $dataSistema = new Data();
                 <div class="navbar-nav mr-auto py-0">
                     <a href="dashboard.php" class="nav-item nav-link active">Home</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Usuário</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cadastros</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="usuario_cad.php" class="dropdown-item">Cadastro</a>
-                            <a href="usuario_pesq.php" class="dropdown-item">Pesquisa</a>
+                            <a href="usuario_cad.php" class="dropdown-item">Usuários</a>
+                            <a href="menu_cad.php" class="dropdown-item">Menu</a>
+                            <a href="categoria_cad.php" class="dropdown-item">Categorias</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Matéria</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pesquisas</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="materia_cad.php" class="dropdown-item">Cadastro</a>
-                        <a href="materia_pesq.php" class="dropdown-item">Pesquisa</a>
+                        <a href="usuario_pesq.php" class="dropdown-item">Usuários</a>
+                        <a href="menu_pesq.php" class="dropdown-item">Menu</a>
+                        <a href="categoria_pesq.php" class="dropdown-item">Categoria</a>
                     </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categoria</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            <a href="categoria_cad.php" class="dropdown-item">Cadastro</a>
-                            <a href="categoria_pesq.php" class="dropdown-item">Pesquisa</a>
-                        </div>
                     </div>
                     <a href="$" class="nav-item nav-link">Contato</a>
                 </div>
