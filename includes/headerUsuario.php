@@ -95,15 +95,15 @@ $dataSistema = new Data();
                         <a href="materia_cad.php" class="dropdown-item">Cadastro</a>
                         <a href="materia_pesq.php" class="dropdown-item">Pesquisa</a>
                     </div>
+                    </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-lin dropdown-toggle" data-toggle="dropdown">Categoria</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categoria</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="categoria_cad.php" class="dropdown-item">Cadastro</a>
                             <a href="categoria_pesq.php" class="dropdown-item">Pesquisa</a>
                         </div>
                     </div>
-                    </div>
-                            <a href="$" class="nav-item nav-link">Contato</a>
+                    <a href="$" class="nav-item nav-link">Contato</a>
                 </div>
                 <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
                     <input type="text" class="form-control" placeholder="Pesquisar">

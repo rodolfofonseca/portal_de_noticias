@@ -4,9 +4,11 @@
  */
 class Usuario{
     private $idUsuario = 0;
-    private $nomeUsuario =  '';
-    private $emailUsuario =  '';
-    private $senhaUsuario =  '';
+    private $nomeUsuario = '';
+    private $emailUsuario = '';
+    private $senhaUsuario = '';
+    private $statusUsuario = '';
+    private $tipoUsuario = '';
     public function __construct()
     {
     }
@@ -33,6 +35,18 @@ class Usuario{
     }
     public function getSenhaUsuario(){
         return $this->senhaUsuario;
+    }
+    public function setTipoUsuario($tipoUsuario){
+        $this->tipoUsuario = $tipoUsuario;
+    }
+    public function getTipoUsuario(){
+        return $this->tipoUsuario;
+    }
+    public function setStatusUsuario($statusUsuario){
+        $this->statusUsuario = $statusUsuario;
+    }
+    public function getStatusUsuario(){
+        return $this->statusUsuario;
     }
 }
 ?>

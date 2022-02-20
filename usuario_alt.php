@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $usuario->setNomeUsuario((string)strtoupper($_POST['nome_usuario']));
         $usuario->setEmailUsuario((string)$_POST['email_usuario']);
         $usuario->setSenhaUsuario((string)$_POST['senha_usuario']);
+        $usuario->setStatusUsuario((string)$_POST['status']);
+        $usuario->setTipoUsuario((string)$_POST['tipo_usuario']);
         $controller = new UsuarioCtr();
         $retorno = $controller->Alterar($usuario);
         if ($retorno == true) {
@@ -48,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $usuario->setIdUsuario((int) $ret['id_usuario']);
         $usuario->setNomeUsuario((string) $ret['nome_usuario']);
         $usuario->setEmailUsuario((string) $ret['email_usuario']);
+        $usuario->setStatusUsuario((string)$ret['status']);
+        $usuario->setTipoUsuario((string)$ret['tipo_usuario']);
     }
 }
 ?>
@@ -76,13 +80,65 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             </div>
                             <div class="col-md-4">
                                 <div class="control-group">
-                                    <input type="password" class="form-control p-4" id="senha_usuario" name="senha_usuario" placeholder="Senha do usuário" required="required" data-validation-required-message="Digite a senha do usuário" />
+                                    <input type="password" class="form-control p-4" id="senha_usuario" name="senha_usuario" placeholder="Senha do usuário"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <input type="submit" class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;" value="Alterar" />
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <label for="tipo_usuario">Tipo usuario</label>
+                                    <select name="tipo_usuario" id="tipo_usuario" class="form-control">
+                                        <?php
+                                        if($usuario->getTipoUsuario() == 'ADMINISTRADOR'){
+                                            ?>
+                                            <option value="ADMINISTRADOR" selected>ADMINISTRADOR</option>
+                                            <option value="EDITOR">EDITOR</option>
+                                            <?php
+                                        }else{
+                                            ?>
+                                            <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                                            <option value="EDITOR" selected>EDITOR</option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <label for="status">Status usuário</label>
+                                    <select name="status" id="status" class="form-control">
+                                    <?php
+                                    if($usuario->getStatusUsuario() == 'ATIVO'){
+                                        ?>
+                                        <option value="ATIVO" selected>ATIVO</option>
+                                        <option value="INATIVO">INATIVO</option>
+                                        <?php
+                                    }else{
+                                        ?>
+                                        <option value="ATIVO">ATIVO</option>
+                                        <option value="INATIVO" selected>INATIVO</option>
+                                        <?php
+                                    }
+                                    ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <input type="submit" class="btn btn-primary font-weight-semi-bold px-4"  value="Cadastrar" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="reset" class="btn btn-danger forn-weight-semi-bold px4" value="Cancelar"/>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>

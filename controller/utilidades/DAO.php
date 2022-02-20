@@ -35,7 +35,6 @@ class DAO
             Connection::Desconectar();
             return true;
         } catch (Exception $ex) {
-            echo $ex->getMessage();
             Connection::Desconectar();
             return false;
         }
@@ -69,6 +68,7 @@ class DAO
             Connection::Desconectar();
             return true;
         } catch (Exception $ex) {
+            echo $ex->getMessage();
             Connection::Desconectar();
             return false;
         }
