@@ -24,7 +24,7 @@ class Data{
     public function mes($opc){
         $timeZone = new DateTimeZone('America/Sao_Paulo');
         $data = new DateTime('now', $timeZone);
-        if($opc == true){{}
+        if($opc == true){
             return $data->format('m');
         }
         else{
