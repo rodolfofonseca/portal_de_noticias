@@ -15,17 +15,17 @@ class MenuCtr{
             $dados = array($model->getDescricaoMenu(), $model->getApareceMenu());
             return $this->dao->Salvar('menu', 'descricao_menu, aparece_menu_menu', $dados);
         }catch(Exception $ex){
-            $this->log->EscreverArquivo($ex);
+            $this->log->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             return false;
         }
     }
     public function Alterar($model){
         try{
             $dados = array($model->getDescricaoMenu(), $model->getApareceMenu(), $model->getIdMenu());
-            $campos = array('descricao_categoria', 'aparece_menu_menu');
+            $campos = array('descricao_menu', 'aparece_menu_menu');
             return $this->dao->Alterar('menu', $campos, $dados, 'id_menu');
         }catch(Exception $ex){
-            $this->log->EscreverArquivo($ex);
+            $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             return false;
         }
     }
@@ -33,7 +33,7 @@ class MenuCtr{
         try{
             return $this->dao->Pesquisar('select * from menu order by descricao_menu');
         }catch(Exception $ex){
-            $this->log->EscreverArquivo($ex);
+            $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             return array();
         }
     }

@@ -2,12 +2,17 @@
 require_once 'includes/headerUsuario.php';
 require_once 'controller/CategoriaCtr.php';
 require_once 'controller/modelos/Categoria.php';
+require_once 'controller/modelos/Menu.php';
+$controller = new CategoriaCtr();
+$retorno = $controller->Pesquisar('select * from menu order by descricao_menu;');
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (!empty($_POST)) {
         $model = new Categoria();
+        $menu = new Menu();
+        $menu->setIdMenu((int) $_POST['menu']);
         $model->setDescricaoCategoria((string)$_POST['descricao']);
         $model->setApareceMenu((string)$_POST['aparece_menu']);
-        $controller = new CategoriaCtr();
+        $model->setMenu($menu);
         if ($controller->Salvar($model) == true) {
 ?><script>
                 Swal.fire({
@@ -39,18 +44,30 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="contact-form bg-light mb-3" style="padding: 30px;">
                     <form method="POST" accept="categoria_cad.php">
                         <div class="form-row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="descricao">Descrição</label>
                                     <input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descrição" required data-validation-required-message="Informe a descrição" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="aparece_menu">Aparece no menu</label>
                                 <select name="aparece_menu" id="aparece_menu" class="form-control">
                                     <option value="S" selected>SIM</option>
                                     <option value="N">NÃO</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="menu">Menu</label>
+                                <select name="menu" id="menu" class="form-control">
+                                    <?php
+                                    foreach ($retorno as $ret) {
+                                    ?>
+                                        <option value="<?php echo $ret['id_menu']; ?>"><?php echo $ret['descricao_menu']; ?></option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>

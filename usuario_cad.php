@@ -33,21 +33,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <div class="col-md-4">
                                 <div class="control-group">
                                     <label for="nome_usuario">Nome usuário</label>
-                                    <input type="text" class="form-control p-4" id="nome_usuario" name="nome_usuario" placeholder="Nome do Usuário" required="required" data-validation-required-message="Informe o nome do usuário" />
+                                    <input type="text" class="form-control px-4" id="nome_usuario" name="nome_usuario" placeholder="Nome do Usuário" required="required" data-validation-required-message="Informe o nome do usuário" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="control-group">
                                     <label for="email">E-mail</label>
-                                    <input type="email" class="form-control p-4" id="email" name="email_usuario" placeholder="email do usuário" required="required" data-validation-required-message="Informe o email do usuário" />
+                                    <input type="email" class="form-control px-4" id="email" name="email_usuario" placeholder="email do usuário" required="required" data-validation-required-message="Informe o email do usuário" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="control-group">
                                     <label for="senha_usuario">Senha</label>
-                                    <input type="password" class="form-control p-4" id="senha_usuario" name="senha_usuario" placeholder="Senha do usuário" required="required" data-validation-required-message="Digite a senha do usuário" />
+                                    <input type="password" class="form-control px-4" id="senha_usuario" name="senha_usuario" placeholder="Senha do usuário" required="required" data-validation-required-message="Digite a senha do usuário" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>

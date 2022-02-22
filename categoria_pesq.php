@@ -13,23 +13,29 @@ require_once 'controller/CategoriaCtr.php';
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>DESCRIÇÃO</th>
-                            <th>APARECE MENU</th>
-                            <th>AÇÃO</th>
+                            <th class="text-center">#</th>
+                            <th class="text-center">DESCRIÇÃO CATEGORIA</th>
+                            <th class="text-center">APARECE MENU</th>
+                            <th class="text-center">MENU</th>
+                            <th class="text-center">AÇÃO</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $controller = new CategoriaCtr();
-                        $retorno = $controller->Pesquisar();
+                        $retorno = $controller->Pesquisar('select categoria.id_categoria, categoria.descricao_categoria, categoria.aparece_menu, menu.descricao_menu from categoria, menu where menu.id_menu = categoria.id_menu_categoria order by descricao_categoria;');
                         foreach($retorno as $categoria){
                             ?>
                             <tr>
-                                <td><?php echo $categoria['id_categoria']; ?></td>
-                                <td><?php echo $categoria['descricao_categoria']; ?></td>
-                                <td><?php echo $categoria['aparece_menu']; ?></td>
-                                <td><a href="categoria_alt.php?id_categoria=<?php echo $categoria['id_categoria']; ?>" class="btn btn-secondary font-weight-semi-bold px-4" style="height: 50px;">Alterar</a></td>
+                                <td class="text-center"><?php echo $categoria['id_categoria']; ?></td>
+                                <td class="text-center"><?php echo $categoria['descricao_categoria']; ?></td>
+                                <td class="text-center"><?php if($categoria['aparece_menu'] == 'S'){
+                                    echo 'SIM';
+                                }else{
+                                    echo 'NÃO';
+                                } ?></td>
+                                <td class="text-center"><?php echo $categoria['descricao_menu']; ?></td>
+                                <td class="text-center"><a href="categoria_alt.php?id_categoria=<?php echo $categoria['id_categoria']; ?>" class="btn btn-secondary font-weight-semi-bold px-4" style="height: 50px;">Alterar</a></td>
                             </tr>
                             <?php
                         }

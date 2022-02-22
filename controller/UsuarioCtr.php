@@ -35,9 +35,8 @@ class UsuarioCtr{
             return false;
         }
     }
-    public function Pesquisar(){
+    public function Pesquisar($pesquisar){
         try{
-            $pesquisar = 'select * from usuario order by nome_usuario;';
             $retorno = $this->dao->Pesquisar($pesquisar);
             return $retorno;
         }catch(Exception $ex){

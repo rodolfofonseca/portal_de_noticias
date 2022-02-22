@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <div class="container-fluid py-3">
     <div class="container">
         <div class="bg-light py-2 px-4 mb-3">
-            <h3 class="m-0">Cadastro de usuários</h3>
+            <h3 class="m-0">Alteração de usuários</h3>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -131,12 +131,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="control-group">
-                                    <input type="submit" class="btn btn-primary font-weight-semi-bold px-4"  value="Cadastrar" />
+                                    <input type="submit" class="btn btn-primary font-weight-semi-bold px-4"  value="Alterar" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="reset" class="btn btn-danger forn-weight-semi-bold px4" value="Cancelar"/>
+                                    <input type="reset" class="btn btn-danger font-weight-semi-bold px-4" value="Cancelar"/>
                                 </div>
                             </div>
                         </div>

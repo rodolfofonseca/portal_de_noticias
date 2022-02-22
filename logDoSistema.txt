@@ -1,0 +1,9 @@
+21/02/2022-20:02:28--SQLSTATE[42703]: Undefined column: 7 ERROR:  column "descricao_categoria" of relation "menu" does not exist
+LINE 1: update menu set descricao_categoria = $1, aparece_menu_menu ...
+                        ^
+21/02/2022-20:24:59--SQLSTATE[22001]: String data, right truncated: 7 ERROR:  value too long for type character varying(15)
+21/02/2022-21:39:03--SQLSTATE[42703]: Undefined column: 7 ERROR:  column "id_categoria_menu" of relation "categoria" does not exist
+LINE 1: update categoria set id_categoria_menu = $1, descricao_categ...
+                             ^
+21/02/2022-21:40:52--SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 4 parameters, but prepared statement "pdo_stmt_00000001" requires 5
+21/02/2022-21:41:15--SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 4 parameters, but prepared statement "pdo_stmt_00000001" requires 5

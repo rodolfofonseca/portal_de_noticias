@@ -13,10 +13,10 @@ require_once 'controller/MenuCtr.php';
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>DESCRIÇÃO</th>
-                            <th>APARECE MENU</th>
-                            <th>AÇÃO</th>
+                            <th class="text-center">#</th>
+                            <th class="text-center">DESCRIÇÃO</th>
+                            <th class="text-center">APARECE MENU</th>
+                            <th class="text-center">AÇÃO</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,10 +26,10 @@ require_once 'controller/MenuCtr.php';
                         foreach($retorno as $menu){
                             ?>
                             <tr>
-                                <td><?php echo $menu['id_menu']; ?></td>
-                                <td><?php echo $menu['descricao_menu']; ?></td>
-                                <td><?php if($menu['aparece_menu_menu']=='S'){echo 'SIM';}else{echo 'NÃO';} ?></td>
-                                <td><a href="menu_alt.php?id_menu=<?php echo $menu['id_menu']; ?>" class="btn btn-secondary font-weight-semi-bold px-4" style="height: 50px;">Alterar</a></td>
+                                <td class="text-center"><?php echo $menu['id_menu']; ?></td>
+                                <td class="text-center"><?php echo $menu['descricao_menu']; ?></td>
+                                <td class="text-center"><?php if($menu['aparece_menu_menu']=='S'){echo 'SIM';}else{echo 'NÃO';} ?></td>
+                                <td class="text-center"><a href="menu_alt.php?id_menu=<?php echo $menu['id_menu']; ?>" class="btn btn-secondary font-weight-semi-bold px-4" style="height: 50px;">Alterar</a></td>
                             </tr>
                             <?php
                         }

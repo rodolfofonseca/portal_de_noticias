@@ -1,9 +1,12 @@
 <?php
 require_once 'Connection.php';
+require_once 'LogDoSistema.php';
 class DAO
 {
+    private $logDoSistema = NULL;
     function __construct()
     {
+        $this->logDoSistema = new LogDoSistema();
     }
     /**
      * Função responsável por inserir na base de dados um novo registro.
@@ -35,6 +38,7 @@ class DAO
             Connection::Desconectar();
             return true;
         } catch (Exception $ex) {
+            $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             Connection::Desconectar();
             return false;
         }
@@ -68,7 +72,7 @@ class DAO
             Connection::Desconectar();
             return true;
         } catch (Exception $ex) {
-            echo $ex->getMessage();
+            $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             Connection::Desconectar();
             return false;
         }
@@ -82,7 +86,7 @@ class DAO
             $conexao = Connection::Conectar();
             return $conexao->query($comando);
         }catch(Exception $ex){
-            echo $ex->getMessage();
+            $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             Connection::Desconectar();
         }
     }

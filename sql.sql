@@ -14,8 +14,7 @@ create table menu(
 create table categoria(
 	id_categoria serial not null primary key,
 	id_menu_categoria int not null references menu(id_menu),
-	descricao_categoria varchar(15) not null,
+	descricao_categoria varchar(25) not null,
 	aparece_menu varchar(1) not null
 );
-select * from categoria;
-select * from menu;
+select categoria.id_categoria, categoria.id_menu_categoria, categoria.descricao_categoria, categoria.aparece_menu, menu.descricao_menu from categoria, menu where menu.id_menu = categoria.id_menu_categoria order by descricao_categoria;

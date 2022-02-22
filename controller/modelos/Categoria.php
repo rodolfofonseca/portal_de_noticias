@@ -3,6 +3,7 @@ class Categoria{
     private $idCategoria = 0;
     private $descricaoCategoria = '';
     private $apareceMenu = '';
+    private $menu = NULL;
     function __construct()
     {
     }
@@ -23,6 +24,12 @@ class Categoria{
     }
     public function getApareceMenu(){
         return $this->apareceMenu;
+    }
+    public function setMenu($menu){
+        $this->menu = $menu;
+    }
+    public function getMenu(){
+        return $this->menu;
     }
 }
 ?>
