@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="reset" class="btn btn-danger forn-weight-semi-bold px4" value="Cancelar"/>
+                                    <input type="reset" class="btn btn-danger forn-weight-semi-bold px4 expanded" value="Cancelar"/>
                                 </div>
                             </div>
                         </div>

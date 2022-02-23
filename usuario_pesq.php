@@ -24,7 +24,7 @@ require_once 'controller/UsuarioCtr.php';
                     <tbody>
                         <?php
                         $controller = new UsuarioCtr();
-                        $retorno = $controller->Pesquisar();
+                        $retorno = $controller->Pesquisar('select * from usuario order by nome_usuario;');
                         foreach($retorno as $usuario){
                             ?>
                             <tr>

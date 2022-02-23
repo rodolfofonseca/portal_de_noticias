@@ -50,7 +50,7 @@
 </head>
 <body onload="iniciar_hora()">
 <?php
-require_once 'util/Data.php';
+require_once 'controller/utilidades/Data.php';
 $dataSistema = new Data();
 ?>
     <div class="container-fluid">

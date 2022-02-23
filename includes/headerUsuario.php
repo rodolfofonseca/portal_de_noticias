@@ -1,3 +1,10 @@
+<?php
+session_start();
+if($_SESSION['tipo_usuario'] == 'ADMINISTRADOR'){
+}else{
+    header('Location:index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -88,6 +95,7 @@ $dataSistema = new Data();
                             <a href="usuario_cad.php" class="dropdown-item">Usuários</a>
                             <a href="menu_cad.php" class="dropdown-item">Menu</a>
                             <a href="categoria_cad.php" class="dropdown-item">Categorias</a>
+                            <a href="noticias_cad.php" class="dropdown-item">Matérias</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">

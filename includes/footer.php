@@ -25,7 +25,7 @@
                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Política de privacidade</a>
                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Termos & condições</a>
                 <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Contatos</a>
-                <a class="text-secondary" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Login</a>
+                <a class="text-secondary" href="login.php"><i class="fa fa-angle-right text-dark mr-2"></i>Login</a>
             </div>
         </div>
     </div>
