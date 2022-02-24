@@ -2,14 +2,50 @@
 require_once 'includes/headerUsuario.php';
 require_once 'controller/CategoriaCtr.php';
 require_once 'controller/UsuarioCtr.php';
+require_once 'controller/NoticiasCtr.php';
+require_once 'controller/TituloDestaqueCtr.php';
+require_once 'controller/modelos/Noticias.php';
+require_once 'controller/modelos/TituloDestaque.php';
+require_once 'controller/modelos/Usuario.php';
+require_once 'controller/modelos/Categoria.php';
+require_once 'controller/utilidades/Data.php';
+require_once 'controller/utilidades/LogDoSistema.php';
+
+$link_materia = (string) '';
 $usuarioCtr = new UsuarioCtr();
 $categoriaCtr = new CategoriaCtr();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST)) {
-
+        $noticiasModel = new Noticias();
+        $noticiasModel->setNomeNoticia((string) strtoupper($_POST['titulo']));
+        $usuarioModel = new Usuario();
+        $usuarioModel->setIdUsuario((int) $_POST['usuario']);
+        $noticiasModel->setUsuario($usuarioModel);
+        $categoriaModel = new Categoria();
+        $categoriaModel->setIdCategoria((int) $_POST['categoria']);
+        $tituloDestaqueModel = new TituloDestaque();
+        $tituloDestaqueModel->setDataInicio((string) $_POST['data_inicio']);
+        $tituloDestaqueModel->setDataFim((string) $_POST['data_fim']);
+        $tituloDestaqueModel->setHoraFim((int) $_POST['hora_fim']);
+        $tituloDestaqueModel->setHoraInicio((int) $_POST['hora_inicio']);
+        $noticiasModel->setImagem((string) $_POST['imagem']);
+        $noticiasModel->setLinkMateria((string) $_POST['link_materia']);
+        $noticiasModel->setDataPostagem($dataSistema->dia(true).'/'.$dataSistema->mes(true).'/'.$dataSistema->ano(true));
     }
 }
 ?>
+<script>
+    /**
+    Serve para mostrar uma mensagem ao usuário com uma pequena explicação de que para que serve certos recursos dentro do sistema.
+     */
+function ajuda(){
+    Swal.fire(
+    'O que são esses campos?',
+    'Os campos DATA INÍCIO, DATA FIM, HORA INÍCIO, HORA FIM serve para informar o sistema até quando a matéria deve ter o seu título destacado!',
+    'question'
+);
+}
+</script>
 <div class="container-fluid py-3">
     <div class="container">
         <div class="bg-light py-2 px-4 mb-3">
@@ -54,18 +90,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </select>
                         </div>
                     </div>
+                    <br/>
                     <div class="form-row">
                         <div class="col-md-3">
-
+                            <label for="data_inicio">Data início</label>
+                            <input type="date" name="data_inicio" id="data_inicio" class="form-control" required/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="hora_inicio">Hora de início</label>
+                            <input type="number" name="hora_inicio" id="hora_inicio" class="form-control"  placeholder="00" required/>
                         </div>
                         <div class="col-md-3">
-                            
+                            <label for="data_fim">Data Fim</label>
+                            <input type="date" name="data_fim" id="data_fim" class="form-control" required/>
                         </div>
-                        <div class="col-md-3">
-                            
+                        <div class="col-md-2">
+                            <label for="hora_fim">Hora fim</label>
+                            <input type="number" name="hora_fim" id="hora_fim" class="form-control" required placeholder="00"/>
                         </div>
-                        <div class="col-md-3">
-                            
+                        <div class="col-md-2">
+                            <label>Precisa de ajuda?</label>
+                            <a href="#" class="btn btn-secondary font-weight-semi-bold px-4 expanded" onclick="ajuda();">Ajuda</a>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="control-group">
+                                <label for="imagem">Imagem</label>
+                                <input type="file" name="imagem" id="imagem" class="form-control" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="control-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control" required>
+                                    <option value="ATIVO" selected>ATIVO</option>
+                                    <option value="INATIVO">INATIVO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="control-group">
+                                <label for="link_materia">Link da matéria</label>
+                                <input type="text" name="link_materia" id="link_materia" value="" readonly class="form-control" placeholder="LINK DA MATÉRIA"/>
+                            </div>
                         </div>
                     </div>
                     <br/>

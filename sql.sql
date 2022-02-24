@@ -17,4 +17,28 @@ create table categoria(
 	descricao_categoria varchar(25) not null,
 	aparece_menu varchar(1) not null
 );
-select categoria.id_categoria, categoria.id_menu_categoria, categoria.descricao_categoria, categoria.aparece_menu, menu.descricao_menu from categoria, menu where menu.id_menu = categoria.id_menu_categoria order by descricao_categoria;
+create table noticias(
+	id_noticias serial not null primary key,
+	id_usuario int not null references usuario(id_usuario),
+	id_categoria int not null references categoria(id_categoria),
+	titulo_noticias varchar(255) not null,
+	data_postagem varchar(10) not null,
+	status varchar(1) not null,
+	link_materia varchar(255) not null,
+	imagem varchar(255) not null
+);
+create table titulo_destaque(
+	id_titulo serial not null primary key,
+	id_materia int not null references noticias(id_noticias),
+	data_inicio varchar(10) not null,
+	data_fim varchar(10) not null,
+	hora_inicio int not null,
+	hora_fim int not null
+);
+create table paragrafos(
+	id_paragrafo serial not null primary key,
+	id_noticia int not null references noticias(id_noticias),
+	imagem varchar(255) not null,
+	paragrafo text not null,
+	antes_depois varchar(1) not null
+);

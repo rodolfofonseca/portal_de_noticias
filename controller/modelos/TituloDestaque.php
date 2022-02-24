@@ -5,8 +5,8 @@ class TituloDestaque
     private $materia = NULL;
     private $dataInicio = '';
     private $dataFim = '';
-    private $horaInicio = '';
-    private $horaFim = '';
+    private $horaInicio = 0;
+    private $horaFim = 0;
     public function __construct()
     {
     }

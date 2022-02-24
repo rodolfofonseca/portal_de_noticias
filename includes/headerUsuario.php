@@ -1,4 +1,6 @@
 <?php
+require_once 'controller/utilidades/Data.php';
+$dataSistema = new Data();
 session_start();
 if($_SESSION['tipo_usuario'] == 'ADMINISTRADOR'){
 }else{
@@ -56,10 +58,6 @@ if($_SESSION['tipo_usuario'] == 'ADMINISTRADOR'){
     </script>
 </head>
 <body onload="iniciar_hora()">
-<?php
-require_once 'controller/utilidades/Data.php';
-$dataSistema = new Data();
-?>
     <div class="container-fluid">
         <div class="row align-items-center bg-light px-lg-5">
             <div class="col-12 col-md-8">
