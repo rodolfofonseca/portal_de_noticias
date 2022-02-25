@@ -24,7 +24,7 @@ create table noticias(
 	titulo_noticias varchar(255) not null,
 	data_postagem varchar(10) not null,
 	status varchar(1) not null,
-	link_materia varchar(255) not null,
+	link_materia varchar(255) not null unique,
 	imagem varchar(255) not null
 );
 create table titulo_destaque(

@@ -12,7 +12,7 @@ class NoticiasCtr{
     }
     public function Salvar($model){
         try{
-            $dados = array($model->getUsuario()->getIdUsuario(), $model->getCategoria()->getIdCategoria(), $model->getNomeNoticia(), $model->getDataPostagem(), $model->getStatus(), $model->getLinkNoticia(), $model->getImagem());
+            $dados = array($model->getUsuario()->getIdUsuario(), $model->getCategoria()->getIdCategoria(), $model->getNomeNoticia(), $model->getDataPostagem(), $model->getStatus(), $model->getLinkMateria(), $model->getImagem());
             return $this->dao->Salvar('noticias', 'id_usuario, id_categoria, titulo_noticias, data_postagem, status, link_materia, imagem', $dados);
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
@@ -21,7 +21,7 @@ class NoticiasCtr{
     }
     public function Alterar($model){
         try{
-            $dados = array($model->getUsuario()->getIdUsuario(), $model->getCategoria()->getIdCategoria(), $model->getNomeNoticia(), $model->getDataPostagem(), $model->getStatus(), $model->getLinkNoticia(), $model->getImagem(), $model->getIdNoticia());
+            $dados = array($model->getUsuario()->getIdUsuario(), $model->getCategoria()->getIdCategoria(), $model->getNomeNoticia(), $model->getDataPostagem(), $model->getStatus(), $model->getLinkMateria(), $model->getImagem(), $model->getIdNoticia());
             $campos = array('id_usuario', 'id_categoria', 'titulo_noticia', 'data_postagem', 'status', 'link_materia', 'imagem');
             return $this->dao->Alterar('noticias', $campos, $dados, 'id_noticias');
         }catch(Exception $ex){

@@ -23,14 +23,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $noticiasModel->setUsuario($usuarioModel);
         $categoriaModel = new Categoria();
         $categoriaModel->setIdCategoria((int) $_POST['categoria']);
+        $noticiasModel->setCategoria($categoriaModel);
         $tituloDestaqueModel = new TituloDestaque();
         $tituloDestaqueModel->setDataInicio((string) $_POST['data_inicio']);
         $tituloDestaqueModel->setDataFim((string) $_POST['data_fim']);
         $tituloDestaqueModel->setHoraFim((int) $_POST['hora_fim']);
         $tituloDestaqueModel->setHoraInicio((int) $_POST['hora_inicio']);
-        $noticiasModel->setImagem((string) $_POST['imagem']);
+        //$noticiasModel->setImagem((string) $_POST['imagem']);
         $noticiasModel->setLinkMateria((string) $_POST['link_materia']);
+        $quantidadeParagrafo = $_POST['quantidade_paragrafo'];
         $noticiasModel->setDataPostagem($dataSistema->dia(true).'/'.$dataSistema->mes(true).'/'.$dataSistema->ano(true));
+        $noticiasCtr = new NoticiasCtr();
+        if($noticiasCtr->Salvar($noticiasModel) == true){
+            $retorno = $noticiasCtr->Pesquisar("select * from noticias where link_materia = '".$noticiasModel->getLinkMateria()."';");
+            foreach($retorno as $retornos){
+                $noticiasModel->setIdNoticia((int) $retornos['id_noticias']);
+            }
+            $tituloDestaqueCtr = new tituloDestaqueCtr();
+            $tituloDestaqueModel->setMateria($noticiasModel);
+            if($tituloDestaqueCtr->Salvar($tituloDestaqueModel) == true){
+                $_SESSION['noticia'] = $noticiasModel->getIdNoticia();
+                $_SESSION['quantidade_paragafos'] = $quantidadeParagrafo;
+                ?>
+                <script>
+                    window.location.href = "paragrafos_cad.php";
+                </script>
+                <?php
+            }else{
+                ?>
+                <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Atenção',
+                    text: 'Erro durante a operação',
+                    footer: 'Tente novamente mais tarde'
+                });
+            </script>
+                <?php
+            }
+        }else{
+            ?>
+                <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Atenção',
+                    text: 'Erro durante a operação',
+                    footer: 'Tente novamente mais tarde'
+                });
+            </script>
+                <?php
+        }
     }
 }
 ?>
@@ -115,18 +157,24 @@ function ajuda(){
                     </div>
                     <br/>
                     <div class="form-row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="control-group">
                                 <label for="imagem">Imagem</label>
                                 <input type="file" name="imagem" id="imagem" class="form-control" required/>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="control-group">
+                                <label for="quantidade_paragrafo">Qtd. Parágrafos</label>
+                                <input type="number" name="quantidade_paragrafo" id="quantidade_paragrafo" value="1" placeholder="QUANTIDADE PARÁGRAFO" required class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="control-group">
                                 <label for="status">Status</label>
                                 <select name="status" id="status" class="form-control" required>
-                                    <option value="ATIVO" selected>ATIVO</option>
-                                    <option value="INATIVO">INATIVO</option>
+                                    <option value="A" selected>ATIVO</option>
+                                    <option value="I">INATIVO</option>
                                 </select>
                             </div>
                         </div>
@@ -136,7 +184,7 @@ function ajuda(){
                         <div class="col-md-12">
                             <div class="control-group">
                                 <label for="link_materia">Link da matéria</label>
-                                <input type="text" name="link_materia" id="link_materia" value="" readonly class="form-control" placeholder="LINK DA MATÉRIA"/>
+                                <input type="text" name="link_materia" id="link_materia" value="" class="form-control" placeholder="LINK DA MATÉRIA"/>
                             </div>
                         </div>
                     </div>
