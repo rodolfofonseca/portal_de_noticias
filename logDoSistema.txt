@@ -43,3 +43,7 @@ LINE 1: select * from usuario where nome_usuario = RODOLFO and senha...
 22/02/2022-22:56:15--SQLSTATE[42703]: Undefined column: 7 ERROR:  column "status" does not exist
 LINE 1: select * from categoria where status = 'ATIVO' order by desc...
                                       ^
+25/02/2022-22:20:19--SQLSTATE[22001]: String data, right truncated: 7 ERROR:  value too long for type character varying(1)
+25/02/2022-22:20:19--SQLSTATE[22001]: String data, right truncated: 7 ERROR:  value too long for type character varying(1)
+25/02/2022-22:20:20--SQLSTATE[22001]: String data, right truncated: 7 ERROR:  value too long for type character varying(1)
+25/02/2022-22:20:20--SQLSTATE[22001]: String data, right truncated: 7 ERROR:  value too long for type character varying(1)

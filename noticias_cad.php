@@ -10,7 +10,6 @@ require_once 'controller/modelos/Usuario.php';
 require_once 'controller/modelos/Categoria.php';
 require_once 'controller/utilidades/Data.php';
 require_once 'controller/utilidades/LogDoSistema.php';
-
 $link_materia = (string) '';
 $usuarioCtr = new UsuarioCtr();
 $categoriaCtr = new CategoriaCtr();
@@ -29,11 +28,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tituloDestaqueModel->setDataFim((string) $_POST['data_fim']);
         $tituloDestaqueModel->setHoraFim((int) $_POST['hora_fim']);
         $tituloDestaqueModel->setHoraInicio((int) $_POST['hora_inicio']);
-        //$noticiasModel->setImagem((string) $_POST['imagem']);
         $noticiasModel->setLinkMateria((string) $_POST['link_materia']);
+        $noticiasModel->setStatus($_POST['status']);
         $quantidadeParagrafo = $_POST['quantidade_paragrafo'];
         $noticiasModel->setDataPostagem($dataSistema->dia(true).'/'.$dataSistema->mes(true).'/'.$dataSistema->ano(true));
         $noticiasCtr = new NoticiasCtr();
+        if(isset($_FILES["imagem"]['name']) && $_FILES["imagem"]['error'] == 0){
+            $nomeImagem = 'img/materias/'.$noticiasModel->getLinkMateria();
+            $nomeImagem = $nomeImagem.$contador;
+            $arquivo_tmp = $_FILES["imagem"]['tmp_name'];
+            $nomeAtual = $_FILES["imagem"]['name'];
+            $extensao = strrchr($nomeAtual, '.');
+            $extensao = strtolower($extensao);
+            if(strstr('.jpg;.jpeg;.gif;.png', $extensao)){
+                $nomeImagem = $nomeImagem.$extensao;
+                if(@move_uploaded_file($arquivo_tmp, $nomeImagem)){
+                    $noticiasModel->setImagem((string) $nomeImagem);
+                }
+            }
+        }
         if($noticiasCtr->Salvar($noticiasModel) == true){
             $retorno = $noticiasCtr->Pesquisar("select * from noticias where link_materia = '".$noticiasModel->getLinkMateria()."';");
             foreach($retorno as $retornos){
@@ -76,10 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-<script>
-    /**
-    Serve para mostrar uma mensagem ao usuário com uma pequena explicação de que para que serve certos recursos dentro do sistema.
-     */
+<script type="text/javascript">
 function ajuda(){
     Swal.fire(
     'O que são esses campos?',
@@ -87,6 +97,11 @@ function ajuda(){
     'question'
 );
 }
+function linkMateria(){
+    let link = document.getElementById('titulo').value;
+    link = link.replaceAll(' ', '_');
+    document.getElementById('link_materia').value = link;
+} 
 </script>
 <div class="container-fluid py-3">
     <div class="container">
@@ -100,7 +115,7 @@ function ajuda(){
                     <div class="form-row">
                         <div class="col-md-12">
                             <label for="titulo">Título</label>
-                            <input type="text" name="titulo" id="titulo" placeholder="TÍTULO DA MATERIA" required data-validation-required-message="Informe o título da matéria" class="form-control"/>
+                            <input type="text" name="titulo" id="titulo" placeholder="TÍTULO DA MATERIA" required data-validation-required-message="Informe o título da matéria" class="form-control"onblur="linkMateria();"/>
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
@@ -184,7 +199,7 @@ function ajuda(){
                         <div class="col-md-12">
                             <div class="control-group">
                                 <label for="link_materia">Link da matéria</label>
-                                <input type="text" name="link_materia" id="link_materia" value="" class="form-control" placeholder="LINK DA MATÉRIA"/>
+                                <input type="text" name="link_materia" id="link_materia" value="" class="form-control" placeholder="LINK DA MATÉRIA" readonly/>
                             </div>
                         </div>
                     </div>
