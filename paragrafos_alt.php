@@ -5,48 +5,58 @@ require_once 'controller/modelos/Noticias.php';
 require_once 'controller/ParagrafoCtr.php';
 require_once 'controller/utilidades/LogDoSistema.php';
 $controller = new ParagrafoCtr();
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    if(!empty($_POST)){
-       try{
-        $model = new Paragrafos();
-        $materias = new Noticias();
-        for($contador = (int) 1; $contador<=$_SESSION['quantidade_paragafos']; $contador++){
-            $materias->setIdNoticia((int) $_SESSION['noticia']);
-            $model->setNoticia($materias);
-            $model->setTexto($_POST["paragrafo_$contador"]);
-            $model->setLocalImagem($_POST["posicao_imagem_$contador"]);
-            if(isset($_FILES["imagem_$contador"]['name']) && $_FILES["imagem_$contador"]['error'] == 0){
-                $nomeImagem = 'img/paragrafos/'.$_SESSION['noticia'];
-                $nomeImagem = $nomeImagem.$contador;
-                $arquivo_tmp = $_FILES["imagem_$contador"]['tmp_name'];
-                $nomeAtual = $_FILES["imagem_$contador"]['name'];
-                $extensao = strrchr($nomeAtual, '.');
-                $extensao = strtolower($extensao);
-                if(strstr('.jpg;.jpeg;.gif;.png', $extensao)){
-                    $nomeImagem = $nomeImagem.$extensao;
-                    if(@move_uploaded_file($arquivo_tmp, $nomeImagem)){
-                        $model->setImagem((string) $nomeImagem);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!empty($_POST)) {
+        try {
+            $model = new Paragrafos();
+            $materias = new Noticias();
+            $controller->ExecutarComando("delete from paragrafos where id_noticia = '" . $_SESSION['noticia'] . "';");
+            for ($contador = (int) 1; $contador <= $_SESSION['quantidade_paragafos']; $contador++) {
+                $materias->setIdNoticia((int) $_SESSION['noticia']);
+                $model->setNoticia($materias);
+                $model->setTexto($_POST["paragrafo_$contador"]);
+                $model->setLocalImagem($_POST["posicao_imagem_$contador"]);
+                if (isset($_FILES["imagem_$contador"]['name']) && $_FILES["imagem_$contador"]['error'] == 0) {
+                    $nomeImagem = 'img/paragrafos/' . $_SESSION['noticia'];
+                    $nomeImagem = $nomeImagem . $contador;
+                    $arquivo_tmp = $_FILES["imagem_$contador"]['tmp_name'];
+                    $nomeAtual = $_FILES["imagem_$contador"]['name'];
+                    $extensao = strrchr($nomeAtual, '.');
+                    $extensao = strtolower($extensao);
+                    if (strstr('.jpg;.jpeg;.gif;.png', $extensao)) {
+                        $nomeImagem = $nomeImagem . $extensao;
+                        if (@move_uploaded_file($arquivo_tmp, $nomeImagem)) {
+                            $model->setImagem((string) $nomeImagem);
+                        }
                     }
                 }
+                $retorno = $controller->Salvar($model);
+                $model->setLocalImagem((string) '');
+                $model->setImagem((string)'');
+?>
+                <script type="text/javascript">
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso',
+                        Text: 'Operação realizada com sucesso!'
+                    });
+                </script>
+            <?php
             }
-            $retorno = $controller->Salvar($model);
-            $model->setLocalImagem((string) '');
-            $model->setImagem((string)'');
+        } catch (Exception $ex) {
+            $logDoSistema = new LogDoSistema();
+            $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             ?>
             <script type="text/javascript">
-                Swal.fire({icon:'success', title:'Sucesso', Text:'Operação realizada com sucesso!'});
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Atenção',
+                    text: 'Erro durante a operação',
+                    footer: 'Tente novamente mais tarde'
+                });
             </script>
-            <?php
+<?php
         }
-       }catch(Exception $ex){
-           $logDoSistema = new LogDoSistema();
-           $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
-           ?>
-           <script type="text/javascript">
-                Swal.fire({icon:'error', title:'Atenção', text:'Erro durante a operação', footer:'Tente novamente mais tarde'});
-            </script>
-           <?php
-       }
     }
 }
 ?>
@@ -90,9 +100,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         <div class="control-group">
                                             <label for="posicao_imagem_<?php echo $contador; ?>">Posição da imagem</label>
                                             <select name="posicao_imagem_<?php echo $contador; ?>" id="posicao_imagem_<?php echo $contador; ?>" class="form-control">
-                                                <option value="-" selected>----</option>
-                                                <option value="A">ANTES</option>
-                                                <option value="D">DEPOIS</option>
+                                                <?php
+                                                if ($paragrafo['antes_depois'] == '-') {
+                                                ?>
+                                                    <option value="-" selected>----</option>
+                                                    <option value="A">ANTES</option>
+                                                    <option value="D">DEPOIS</option>
+                                                    <?php
+                                                } else {
+                                                    if ($paragrafo['antes_depois'] == 'A') {
+                                                    ?>
+                                                        <option value="-">----</option>
+                                                        <option value="A" selected>ANTES</option>
+                                                        <option value="D">DEPOIS</option>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <option value="-">----</option>
+                                                        <option value="A">ANTES</option>
+                                                        <option value="D" selected>DEPOIS</option>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>

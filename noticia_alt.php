@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $tituloDestaque->setHoraInicio((int) $_POST['hora_inicio']);
             $tituloDestaque->setDataFim((string) $_POST['data_fim']);
             $tituloDestaque->setHoraFim((int) $_POST['hora_fim']);
+            $tituloDestaque->setMateria($model);
             $model->setLinkMateria((string) strtolower($_POST['link_materia']));
             $model->setStatus($_POST['status']);
             $quantidadeParagrafo = $_POST['quantidade_paragrafo'];
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $tituloDestaque->setIdTituloDestaque((int) $destaque['id_titulo']);
             }
             if(isset($_FILES["imagem"]['name']) && $_FILES["imagem"]['error'] == 0){
-                $nomeImagem = 'img/materias/'.$noticiasModel->getLinkMateria();
+                $nomeImagem = 'img/materias/'.$model->getLinkMateria();
                 $nomeImagem = $nomeImagem;
                 $arquivo_tmp = $_FILES["imagem"]['tmp_name'];
                 $nomeAtual = $_FILES["imagem"]['name'];
@@ -62,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if(strstr('.jpg;.jpeg;.gif;.png', $extensao)){
                     $nomeImagem = $nomeImagem.$extensao;
                     if(@move_uploaded_file($arquivo_tmp, $nomeImagem)){
-                        $noticiasModel->setImagem((string) $nomeImagem);
+                        $model->setImagem((string) $nomeImagem);
                     }
                 }
             }
@@ -87,16 +88,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </script>
                 <?php
             }
-            $ret = $dao->Alterar($tituloDestaque);
+            $ret = $tituloDestaqueCtr->Alterar($tituloDestaque);
             if ($ret == true) {
-                $ret = $dao->Alterar($model);
+                $ret = $controller->Alterar($model);
                 if ($ret == true) {
                     $paragrafo = $paragrafos->Pesquisar("select count(*) as quantidade from paragrafos where id_noticia = '" . $model->getIdNoticia() . "';");
                     $qtd = (int) 0;
                     foreach ($paragrafo as $para) {
                         $qtd = (int) $para['quantidade'];
                     }
-                    if ($qtd < $quantidadeParagrafo) {
+                    if ($qtd > $quantidadeParagrafo) {
                 ?>
                         <script>
                             Swal.fire({
@@ -120,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </script>
 <?php
                     }else{
-                        $_SESSION['noticia'] = $noticiasModel->getIdNoticia();
+                        $_SESSION['noticia'] = $model->getIdNoticia();
                         $_SESSION['quantidade_paragafos'] = $quantidadeParagrafo;
                         ?>
                         <script>
@@ -281,7 +282,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="col-md-3">
                                 <div class="control-group">
                                     <label for="imagem">Imagem</label>
-                                    <input type="file" name="imagem" id="imagem" class="form-control" required />
+                                    <input type="file" name="imagem" id="imagem" class="form-control"/>
                                 </div>
                             </div>
                             <div class="col-md-3">

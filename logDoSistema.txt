@@ -47,3 +47,6 @@ LINE 1: select * from categoria where status = 'ATIVO' order by desc...
 25/02/2022-22:20:19--SQLSTATE[22001]: String data, right truncated: 7 ERROR:  value too long for type character varying(1)
 25/02/2022-22:20:20--SQLSTATE[22001]: String data, right truncated: 7 ERROR:  value too long for type character varying(1)
 25/02/2022-22:20:20--SQLSTATE[22001]: String data, right truncated: 7 ERROR:  value too long for type character varying(1)
+01/03/2022-17:09:58--SQLSTATE[42703]: Undefined column: 7 ERROR:  column "titulo_noticia" of relation "noticias" does not exist
+LINE 1: ... noticias set id_usuario = $1, id_categoria = $2, titulo_not...
+                                                             ^
