@@ -90,4 +90,13 @@ class DAO
             Connection::Desconectar();
         }
     }
+    public function ExecutarComando($comando){
+        try{
+            $conexao = Connection::Conectar();
+            $conexao->query($comando);
+        }catch(Exception $ex){
+            $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
+            Connection::Desconectar();
+        }
+    }
 }

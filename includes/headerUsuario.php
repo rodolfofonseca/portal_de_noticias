@@ -2,13 +2,14 @@
 require_once 'controller/utilidades/Data.php';
 $dataSistema = new Data();
 session_start();
-if($_SESSION['tipo_usuario'] == 'ADMINISTRADOR'){
-}else{
+if ($_SESSION['tipo_usuario'] == 'ADMINISTRADOR') {
+} else {
     header('Location:index.php');
 }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>ASSPOL - Associação Polícial</title>
@@ -32,7 +33,7 @@ if($_SESSION['tipo_usuario'] == 'ADMINISTRADOR'){
         /**
          * Função que se repete a cada segundo e adiciona na tela o tempo de hoje.
          */
-        function iniciar_hora(){
+        function iniciar_hora() {
             var data_e_hora = new Date();
             semana = new Array("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado");
             mes = new Array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
@@ -42,21 +43,22 @@ if($_SESSION['tipo_usuario'] == 'ADMINISTRADOR'){
             hora = adicionar_zero(hora);
             minutos = adicionar_zero(minutos);
             segundos = adicionar_zero(segundos);
-            var tempo = semana[data_e_hora.getDay()] + ", "+ data_e_hora.getDate() + " de " + mes[data_e_hora.getMonth()] + " de " + data_e_hora.getFullYear() + " " + hora + ":" + minutos + ":" + segundos;
+            var tempo = semana[data_e_hora.getDay()] + ", " + data_e_hora.getDate() + " de " + mes[data_e_hora.getMonth()] + " de " + data_e_hora.getFullYear() + " " + hora + ":" + minutos + ":" + segundos;
             document.getElementById('hora_div').innerHTML = tempo;
             t = setTimeout('iniciar_hora()', 500);
         }
         /**
          * Função responsável por verificar se o tempo é < 10 e adicionar um zero na frente para facilitar a visualização do mes,p
          */
-        function adicionar_zero(tempo){
-            if(tempo<10){
-                tempo = "0"+tempo;
+        function adicionar_zero(tempo) {
+            if (tempo < 10) {
+                tempo = "0" + tempo;
             }
             return tempo;
         }
     </script>
 </head>
+
 <body onload="iniciar_hora()">
     <div class="container-fluid">
         <div class="row align-items-center bg-light px-lg-5">
@@ -94,15 +96,22 @@ if($_SESSION['tipo_usuario'] == 'ADMINISTRADOR'){
                             <a href="menu_cad.php" class="dropdown-item">Menu</a>
                             <a href="categoria_cad.php" class="dropdown-item">Categorias</a>
                             <a href="noticias_cad.php" class="dropdown-item">Matérias</a>
+                            <a href="locais_cad.php" class="dropdown-item">Locais</a>
+                            <a href="empresa_cad.php" class="dropdown-item">Empresa</a>
+                            <a href="contrato_cad.php" class="dropdown-item">Contrato</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pesquisas</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                        <a href="usuario_pesq.php" class="dropdown-item">Usuários</a>
-                        <a href="menu_pesq.php" class="dropdown-item">Menu</a>
-                        <a href="categoria_pesq.php" class="dropdown-item">Categoria</a>
-                    </div>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pesquisas</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="usuario_pesq.php" class="dropdown-item">Usuários</a>
+                            <a href="menu_pesq.php" class="dropdown-item">Menu</a>
+                            <a href="categoria_pesq.php" class="dropdown-item">Categoria</a>
+                            <a href="noticias_pesq.php" class="dropdown-item">Matérias</a>
+                            <a href="locais_pesq.php" class="dropdown-item">Locais</a>
+                            <a href="empresa_pesq.php" class="dropdown-item">Empresa</a>
+                            <a href="contrato_pesq.php" class="dropdown-item">Contrato</a>
+                        </div>
                     </div>
                     <a href="$" class="nav-item nav-link">Contato</a>
                 </div>

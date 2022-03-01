@@ -28,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tituloDestaqueModel->setDataFim((string) $_POST['data_fim']);
         $tituloDestaqueModel->setHoraFim((int) $_POST['hora_fim']);
         $tituloDestaqueModel->setHoraInicio((int) $_POST['hora_inicio']);
-        $noticiasModel->setLinkMateria((string) $_POST['link_materia']);
+        $noticiasModel->setLinkMateria((string) strtolower($_POST['link_materia']));
         $noticiasModel->setStatus($_POST['status']);
         $quantidadeParagrafo = $_POST['quantidade_paragrafo'];
         $noticiasModel->setDataPostagem($dataSistema->dia(true).'/'.$dataSistema->mes(true).'/'.$dataSistema->ano(true));
         $noticiasCtr = new NoticiasCtr();
         if(isset($_FILES["imagem"]['name']) && $_FILES["imagem"]['error'] == 0){
             $nomeImagem = 'img/materias/'.$noticiasModel->getLinkMateria();
-            $nomeImagem = $nomeImagem.$contador;
+            $nomeImagem = $nomeImagem;
             $arquivo_tmp = $_FILES["imagem"]['tmp_name'];
             $nomeAtual = $_FILES["imagem"]['name'];
             $extensao = strrchr($nomeAtual, '.');

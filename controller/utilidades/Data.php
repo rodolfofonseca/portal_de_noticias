@@ -56,4 +56,14 @@ class Data{
         $data = new DateTime('now', $timeZone);
         return $data->format('H:i:s');
     }
+    /**
+     * Converte em data compatível com o html qualquer data que venha no parâmetro da base de dados dd/mm/yyyy para yyyy-mm-dd
+     * @param (string) $dataNaoFormatada
+     * @return dataFormata
+      */
+    public function ConverteData($dataNaoFormata){
+        $tmp = strrev($dataNaoFormata);
+        $tmp = str_ireplace('/', '-', $tmp);
+        return $tmp;
+    }
 }

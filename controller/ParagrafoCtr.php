@@ -36,5 +36,12 @@ class ParagrafoCtr{
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
         }
     }
+    public function ExecutarComando($comando){
+        try{
+            $this->dao->ExecutarComando($comando);
+        }catch(Exception $ex){
+            $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
+        }
+    }
 }
 ?>

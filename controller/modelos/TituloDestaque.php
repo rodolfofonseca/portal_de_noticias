@@ -7,6 +7,7 @@ class TituloDestaque
     private $dataFim = '';
     private $horaInicio = 0;
     private $horaFim = 0;
+    private $status = '';
     public function __construct()
     {
     }
@@ -47,5 +48,11 @@ class TituloDestaque
     }
     public function getHoraFim(){
         return $this->horaFim;
+    }
+    public function setStatus($status){
+        $this->status = $status;
+    }
+    public function getStatus(){
+        return $this->status;
     }
 }

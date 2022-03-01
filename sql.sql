@@ -33,7 +33,8 @@ create table titulo_destaque(
 	data_inicio varchar(10) not null,
 	data_fim varchar(10) not null,
 	hora_inicio int not null,
-	hora_fim int not null
+	hora_fim int not null,
+	status varchar(1) not null
 );
 create table paragrafos(
 	id_paragrafo serial not null primary key,
@@ -41,4 +42,52 @@ create table paragrafos(
 	imagem varchar(255) not null,
 	paragrafo text not null,
 	antes_depois varchar(1) not null
+);
+create table locais
+(
+	id_local serial not null primary key,
+	descricao varchar(50) not null,
+	observacao text
+);
+create table empresa
+(
+	id_empresa serial not null primary key,
+	nome_empresa varchar(25) not null,
+	telefone_contato varchar(15),
+	whatsapp varchar(15),
+	observacoes text,
+	status varchar(1) not null
+);
+create table contrato_publicidade
+(
+	id_contrato serial not null primary key,
+	id_usuario_cadastro int not null references usuario(id_usuario),
+	id_usuario_assinatura_contrato int not null references usuario(id_usuario),
+	id_empresa int not null references empresa(id_empresa),
+	data_assinatura varchar(10) not null,
+	valor_contrato numeric(10,2) not null,
+	tipo_pagamento varchar(1) not null,
+	data_inicio varchar(10) not null,
+	data_fim varchar(10) not null,
+	observacoes text
+);
+create table parcelas
+(
+	id_parcela serial not null,
+	id_contrato int not null references contrato_publicidade(id_contrato),
+	valor_parcela numeric(10,2) not null,
+	data_vencimento varchar(10) not null,
+	status varchar(1) not null
+);
+create table anuncios
+(
+	id_anuncio serial not null primary key,
+	id_empresa int not null references empresa(id_empresa),
+	id_locais int not null references locais(id_local),
+	id_contrato int not null references contrato_publicidade(id_contrato),
+	data_inicio varchar(10) not null,
+	hora_inicio int not null,
+	data_fim varchar(10) not null,
+	hora_fim int not null,
+	status varchar(1) not null
 );

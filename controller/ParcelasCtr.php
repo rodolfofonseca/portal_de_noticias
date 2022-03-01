@@ -1,10 +1,10 @@
 <?php
+require_once 'controller/modelos/Parcelas.php';
 require_once 'controller/utilidades/DAO.php';
 require_once 'controller/utilidades/LogDoSistema.php';
-require_once 'controller/modelos/TituloDestaque.php';
-class tituloDestaqueCtr{
-    private $dao = NULL;
-    private $logDoSistema = NULL;
+class ParcelasCtr{
+    private $dao;
+    private $logDoSistema;
     public function __construct()
     {
         $this->dao = new DAO();
@@ -12,8 +12,8 @@ class tituloDestaqueCtr{
     }
     public function Salvar($model){
         try{
-            $dados = array($model->getMateria()->getIdNoticia(), $model->getDataInicio(), $model->getDataFim(), $model->getHoraInicio(), $model->getHoraFim(), $model->getStatus);
-            return $this->dao->Salvar('titulo_destaque', 'id_materia, data_inicio, data_fim, hora_inicio, hora_fim, status', $dados);
+            $dados = array($model->getContrato->getIdContrato(), $model->getValor(), $model->getDataVencimento(), $model->getStatus());
+            return $this->dao->Salvar('parcelas', 'id_contrato, valor_parcela, data_vencimento, status', $dados);
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             return false;
@@ -21,9 +21,9 @@ class tituloDestaqueCtr{
     }
     public function Alterar($model){
         try{
-            $dados = array($model->getMateria()->getIdNoticia(), $model->getDataInicio(), $model->getDataFim(), $model->getHoraInicio(), $model->getHoraFim(), $model->getStatus(),$model->getIdTituloDestaque());
-            $campos = array('id_materia', 'data_inicio', 'data_fim', 'hora_inicio', 'hora_fim', 'status');
-            return $this->dao->Alterar('titulo_destaque', $campos, $dados, 'id_titulo');
+            $dados = array($model->getContrato->getIdContrato(), $model->getValor(), $model->getDataVencimento(), $model->getStatus(), $model->getIdParcela());
+            $campos = array('id_contrato', 'valor_parcela', 'data_vencimento', 'status');
+            return $this->dao->Alterar('parcelas', $campos, $dados, 'id_parcela');
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             return false;
