@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $menu->setIdMenu((int) $_POST['menu']);
             $model->setMenu($menu);
             if ($controller->Alterar($model)) {
-                ?><script>
+?><script>
                     Swal.fire({
                         icon: 'success',
                         title: 'Sucesso',

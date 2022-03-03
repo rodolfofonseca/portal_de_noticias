@@ -3,15 +3,27 @@ require_once 'includes/headerUsuario.php';
 require_once 'controller/modelos/Locais.php';
 require_once 'controller/LocaisCtr.php';
 require_once 'controller/utilidades/LogDoSistema.php';
+$id_local = NULL;
+$model = new Locais();
+$controller = new LocaisCtr();
+$logDoSistema = new LogDoSistema();
+if(!empty($_GET['id_local'])){
+    try{
+        $id_local = (int) $_REQUEST['id_local'];
+        $model->setIdLcais((int) $id_local);
+    }catch(Exception $ex){
+        $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
+    }
+}
+if (NULL == $id_categoria) {
+    header('Location:dashboard.php');
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST)) {
-        $logDoSistema = new LogDoSistema();
         try {
-            $model = new Locais();
-            $controller = new LocaisCtr();
             $model->setDescricao((string) $_POST['descricao']);
             $model->setObservacoes((string) $_POST['observacoes']);
-            if($controller->Salvar($model)){
+            if($controller->Alterar($model)){
                 ?><script>
                 Swal.fire({
                     icon: 'success',
@@ -33,6 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
         }
     }
+}else{
+    try{
+        $retorno = $controller->Pesquisar("select * from locais where id_local = '".$model->getIdLocais()."';");
+        foreach($retorno as $local){
+            $model->setDescricao((string) $local['descricao']);
+            $model->setObservacoes((string) $local['observacoes']);
+        }
+    } catch (Exception $ex) {
+        $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
+    }
 }
 ?>
 <div class="container-fluid py-3">
@@ -43,19 +65,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="row">
             <div class="col-md-12">
                 <div class="contact-form bg-light mb-" style="padding:30px;">
-                    <form method="POST" accept="locais_cad.php">
+                    <form method="POST" accept="locais_cad.php?id_local=<?php echo $model->getIdLocais(); ?>">
                         <div class="form-row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="descricao">Descrição</label>
-                                    <input type="text" name="descricao" id="descricao" placeholder="Descrição dos locais" required data-validation-required-message="Informe a descrição dos locais" class="form-control" />
+                                    <input type="text" name="descricao" id="descricao" placeholder="Descrição dos locais" required data-validation-required-message="Informe a descrição dos locais" class="form-control" value="<?php echo $model->getDescricao(); ?>" />
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="observacoes">Observações</label>
-                                <textarea name="observacoes" id="observacoes"></textarea>
+                                <textarea name="observacoes" id="observacoes"><?php echo $model->getObservacoes(); ?></textarea>
                             </div>
                         </div>
                         <div class="form-row">
