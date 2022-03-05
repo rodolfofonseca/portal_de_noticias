@@ -29,6 +29,7 @@ if ($_SESSION['tipo_usuario'] == 'ADMINISTRADOR') {
     <script defer src="js/contato.js"></script>
     <script defer src="js/main.js"></script>
     <script src="js/alerta.js"></script>
+    <script defer src="js/validacoes.js"></script>
     <script type="text/javascript">
         /**
          * Função que se repete a cada segundo e adiciona na tela o tempo de hoje.

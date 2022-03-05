@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="contact-form bg-light mb-" style="padding:30px;">
+                <div class="contact-form bg-light mb-3" style="padding:30px;">
                     <form method="POST" accept="locais_cad.php">
                         <div class="form-row">
                             <div class="col-md-12">
@@ -53,9 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="col-md-12">
                             <div class="form-group">
                                 <label for="observacoes">Observações</label>
-                                <textarea name="observacoes" id="observacoes"></textarea>
+                                <textarea name="observacoes" id="observacoes" class="form-control"></textarea>
+                            </div>
                             </div>
                         </div>
                         <div class="form-row">

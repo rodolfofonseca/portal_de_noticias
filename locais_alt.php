@@ -7,15 +7,15 @@ $id_local = NULL;
 $model = new Locais();
 $controller = new LocaisCtr();
 $logDoSistema = new LogDoSistema();
-if(!empty($_GET['id_local'])){
-    try{
+if (!empty($_GET['id_local'])) {
+    try {
         $id_local = (int) $_REQUEST['id_local'];
         $model->setIdLcais((int) $id_local);
-    }catch(Exception $ex){
+    } catch (Exception $ex) {
         $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
     }
 }
-if (NULL == $id_categoria) {
+if (NULL == $id_local) {
     header('Location:dashboard.php');
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,40 +23,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             $model->setDescricao((string) $_POST['descricao']);
             $model->setObservacoes((string) $_POST['observacoes']);
-            if($controller->Alterar($model)){
-                ?><script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sucesso',
-                    Text: 'Operação realizada com sucesso!'
-                });
-            </script><?php
-            }else{
-                ?><script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Atenção',
-                    text: 'Erro durante a operação',
-                    footer: 'Tente novamente mais tarde'
-                });
-            </script><?php
+            if ($controller->Alterar($model)) {
+?><script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso',
+                        Text: 'Operação realizada com sucesso!'
+                    });
+                </script><?php
+                        } else {
+                            ?><script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Atenção',
+                        text: 'Erro durante a operação',
+                        footer: 'Tente novamente mais tarde'
+                    });
+                </script><?php
+                        }
+                    } catch (Exception $ex) {
+                        $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
+                    }
+                }
+            } else {
+                try {
+                    $retorno = $controller->Pesquisar("select * from locais where id_local = '" . $model->getIdLocais() . "';");
+                    foreach ($retorno as $local) {
+                        $model->setDescricao((string) $local['descricao']);
+                        $model->setObservacoes((string) $local['observacao']);
+                    }
+                } catch (Exception $ex) {
+                    $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
+                }
             }
-        } catch (Exception $ex) {
-            $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
-        }
-    }
-}else{
-    try{
-        $retorno = $controller->Pesquisar("select * from locais where id_local = '".$model->getIdLocais()."';");
-        foreach($retorno as $local){
-            $model->setDescricao((string) $local['descricao']);
-            $model->setObservacoes((string) $local['observacoes']);
-        }
-    } catch (Exception $ex) {
-        $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
-    }
-}
-?>
+                            ?>
 <div class="container-fluid py-3">
     <div class="container">
         <div class="bg-light py-2 px-4 mb-3">
@@ -75,9 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="observacoes">Observações</label>
-                                <textarea name="observacoes" id="observacoes"><?php echo $model->getObservacoes(); ?></textarea>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="observacoes">Observações</label>
+                                    <textarea name="observacoes" id="observacoes" class="form-control"><?php echo $model->getObservacoes(); ?></textarea>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row">
