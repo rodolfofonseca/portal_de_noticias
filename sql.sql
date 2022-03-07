@@ -89,5 +89,6 @@ create table anuncios
 	hora_inicio int not null,
 	data_fim varchar(10) not null,
 	hora_fim int not null,
-	status varchar(1) not null
+	status varchar(1) not null,
+	local_imagem varchar(255) not null
 );

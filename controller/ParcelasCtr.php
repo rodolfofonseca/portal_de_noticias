@@ -12,7 +12,7 @@ class ParcelasCtr{
     }
     public function Salvar($model){
         try{
-            $dados = array($model->getContrato->getIdContrato(), $model->getValor(), $model->getDataVencimento(), $model->getStatus());
+            $dados = array($model->getContrato()->getIdContrato(), $model->getValor(), $model->getDataVencimento(), $model->getStatus());
             return $this->dao->Salvar('parcelas', 'id_contrato, valor_parcela, data_vencimento, status', $dados);
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
@@ -21,7 +21,7 @@ class ParcelasCtr{
     }
     public function Alterar($model){
         try{
-            $dados = array($model->getContrato->getIdContrato(), $model->getValor(), $model->getDataVencimento(), $model->getStatus(), $model->getIdParcela());
+            $dados = array($model->getContrato()->getIdContrato(), $model->getValor(), $model->getDataVencimento(), $model->getStatus(), $model->getIdParcela());
             $campos = array('id_contrato', 'valor_parcela', 'data_vencimento', 'status');
             return $this->dao->Alterar('parcelas', $campos, $dados, 'id_parcela');
         }catch(Exception $ex){

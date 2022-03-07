@@ -37,11 +37,11 @@ class Empresa{
     public function getStatus(){
         return $this->status;
     }
-    public function setObservacao($observacao){
-        $this->observacoes = $observacao;
+    public function setObservacao($observacoes){
+        $this->observacoes = $observacoes;
     }
     public function getObservacao(){
-        $this->observacoes;
+        return $this->observacoes;
     }
 }
 ?>

@@ -12,7 +12,7 @@ class EmpresaCtr{
     }
     public function Salvar($model){
         try{
-            $dados = array($model->getNomeEmpresa(), $model->getTelefoneContato(), $model->Whatsapp(), $model->getObservacoes(), $model->getStatus());
+            $dados = array($model->getNomeEmpresa(), $model->getTelefoneContato(), $model->getWhatsapp(), $model->getObservacao(), $model->getStatus());
             return $this->dao->Salvar('empresa', 'nome_empresa, telefone_contato, whatsapp, observacoes, status', $dados);
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
@@ -21,7 +21,7 @@ class EmpresaCtr{
     }
     public function Alterar($model){
         try{
-            $dados = array($model->getNomeEmpresa(), $model->getTelefoneContato(), $model->Whatsapp(), $model->getObservacoes(), $model->getStatus(), $model->getIdEmpresa());
+            $dados = array($model->getNomeEmpresa(), $model->getTelefoneContato(), $model->getWhatsapp(), $model->getObservacao(), $model->getStatus(), $model->getIdEmpresa());
             $campos = array('nome_empresa', 'telefone_contato', 'whatsapp', 'observacoes', 'status');
             return $this->dao->Alterar('empresa', $campos, $dados, 'id_empresa');
         }catch(Exception $ex){

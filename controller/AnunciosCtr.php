@@ -12,8 +12,8 @@ class AnunciosCtr{
     }
     public function Salvar($model){
         try{
-            $dados = array($model->getEmpresa()->getIdEmpresa(), $model->getLocais()->getIdLocais(), $model->getContrato()->getIdContrato(), $model->getDataInicio(), $model->getHoraInicio(), $model->getDataFim(), $model->getHoraFim(), $model->getStatus());
-            return $this->dao->Salvar('anuncios', 'id_empresa, id_locais, id_contrato, data_inicio, hora_inicio, data_fim, hora_fim, status', $dados);
+            $dados = array($model->getEmpresa()->getIdEmpresa(), $model->getLocais()->getIdLocais(), $model->getContrato()->getIdContrato(), $model->getDataInicio(), $model->getHoraInicio(), $model->getDataFim(), $model->getHoraFim(), $model->getStatus(), $model->getLocalImagem());
+            return $this->dao->Salvar('anuncios', 'id_empresa, id_locais, id_contrato, data_inicio, hora_inicio, data_fim, hora_fim, status, local_imagem', $dados);
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             return false;
@@ -21,8 +21,8 @@ class AnunciosCtr{
     }
     public function Alterar($model){
         try{
-            $dados = array($model->getEmpresa()->getIdEmpresa(), $model->getLocais()->getIdLocais(), $model->getContrato()->getIdContrato(), $model->getDataInicio(), $model->getHoraInicio(), $model->getDataFim(), $model->getHoraFim(), $model->getStatus(), $model->getIdAnuncio());
-            $campos = array('id_empresa', 'id_locais', 'id_contrato', 'data_inicio', 'hora_inicio', 'data_fim', 'hora_fim', 'status');
+            $dados = array($model->getEmpresa()->getIdEmpresa(), $model->getLocais()->getIdLocais(), $model->getContrato()->getIdContrato(), $model->getDataInicio(), $model->getHoraInicio(), $model->getDataFim(), $model->getHoraFim(), $model->getStatus(), $model->getLocalImagem(),$model->getIdAnuncio());
+            $campos = array('id_empresa', 'id_locais', 'id_contrato', 'data_inicio', 'hora_inicio', 'data_fim', 'hora_fim', 'status', 'local_imagem');
             return $this->dao->Alterar('anuncios', $campos, $dados, 'id_anuncio');
         }catch(Exception $ex){
             return $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());

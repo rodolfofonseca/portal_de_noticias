@@ -9,6 +9,7 @@ class Anuncios{
     private $data_fim;
     private $hora_fim;
     private $status;
+    private $localImagem;
     public function __construct(){}
     public function setIdAnuncios($idAnuncios){
         $this->idAnuncios = $idAnuncios;
@@ -56,13 +57,19 @@ class Anuncios{
         $this->hora_fim = $horaFim;
     }
     public function getHoraFim(){
-        $this->hora_fim;
+        return $this->hora_fim;
     }
     public function setStatus($status){
         $this->status = $status;
     }
     public function getStatus(){
         return $this->status;
+    }
+    public function setLocalImagem($localImagem){
+        $this->localImagem = $localImagem;
+    }
+    public function getLocalImagem(){
+        return $this->localImagem;
     }
 }
 ?>

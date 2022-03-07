@@ -1,5 +1,5 @@
 <?php
-class pacelas{
+class Parcelas{
     private $id_parcela;
     private $contrato;
     private $valor;
