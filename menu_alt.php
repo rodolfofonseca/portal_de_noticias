@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             $model->setDescricaoMenu((string) $_POST['descricao_menu']);
             $model->setApareceMenu((string) $_POST['aparece_menu_menu']);
+            $model->setTemSubMenu((string) $_POST['tem_sub_menu']);
             if ($controller->Alterar($model)) {
 
 ?>
@@ -57,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $model->setIdMenu((int) $menu['id_menu']);
             $model->setDescricaoMenu((string) $menu['descricao_menu']);
             $model->setApareceMenu((string) $menu['aparece_menu_menu']);
+            $model->setTemSubMenu((string) $menu['tem_sub_menu']);
         }
     } catch (Exception $ex) {
         $logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
@@ -73,16 +75,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="contact-form bg-light mb-3" style="padding: 30px;">
                     <form method="POST" accept="menu_alt.php?id_menu=<?php echo $model->getIdMenu(); ?>">
                         <div class="form-row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="descricao_menu">Descrição Menu</label>
                                 <input type="text" name="descricao_menu" id="descricao_menu" value="<?php echo $model->getDescricaoMenu(); ?>" class="form-control px-4" placeholder="Descrição do menu" required data-validation-required-messagem="Informe a descrição do menu" />
                                 <p class="help-block text-danger"></p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="aparece_menu_menu" class="text-center">Aparece menu</label>
                                 <select name="aparece_menu_menu" id="aparece_menu_menu" class="form-control px-4">
                                     <?php
                                     if ($model->getApareceMenu() == 'S') {
+                                    ?>
+                                        <option value="S" selected>SIM</option>
+                                        <option value="N">NÃO</option>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <option value="S">SIM</option>
+                                        <option value="N" selected>NÃO</option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="tem_sub_menu" class="text-center">tem Sub Menu</label>
+                                <select name="tem_sub_menu" id="tem_sub_menu" class="form-control px-4">
+                                    <?php
+                                    if ($model->getTemSubMenu() == 'S') {
                                     ?>
                                         <option value="S" selected>SIM</option>
                                         <option value="N">NÃO</option>

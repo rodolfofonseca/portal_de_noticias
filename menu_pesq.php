@@ -16,6 +16,7 @@ require_once 'controller/MenuCtr.php';
                             <th class="text-center">#</th>
                             <th class="text-center">DESCRIÇÃO</th>
                             <th class="text-center">APARECE MENU</th>
+                            <th class="text-center">TEM SUB MENU</th>
                             <th class="text-center">AÇÃO</th>
                         </tr>
                     </thead>
@@ -29,6 +30,7 @@ require_once 'controller/MenuCtr.php';
                                 <td class="text-center"><?php echo $menu['id_menu']; ?></td>
                                 <td class="text-center"><?php echo $menu['descricao_menu']; ?></td>
                                 <td class="text-center"><?php if($menu['aparece_menu_menu']=='S'){echo 'SIM';}else{echo 'NÃO';} ?></td>
+                                <td class="text-center"><?php if($menu['tem_sub_menu']=='S'){echo 'SIM';}else{echo 'NÃO';} ?></td>
                                 <td class="text-center"><a href="menu_alt.php?id_menu=<?php echo $menu['id_menu']; ?>" class="btn btn-secondary font-weight-semi-bold px-4" style="height: 50px;">Alterar</a></td>
                             </tr>
                             <?php

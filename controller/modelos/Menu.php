@@ -3,6 +3,7 @@ class Menu{
     private $idMenu = 0;
     private $descricaoMenu = '';
     private $apareceMenuMenu = '';
+    private $temSubMenu = '';
     public function setIdMenu($idMenu){
         $this->idMenu = $idMenu;
     }
@@ -20,6 +21,12 @@ class Menu{
     }
     public function getApareceMenu(){
         return $this->apareceMenuMenu;
+    }
+    public function setTemSubMenu($temSubMenu){
+        $this->temSubMenu = $temSubMenu;
+    }
+    public function getTemSubMenu(){
+        return $this->temSubMenu;
     }
 }
 ?>

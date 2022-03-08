@@ -1,0 +1,3 @@
+
+07/03/2022-22:26:39--SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 3 parameters, but prepared statement "pdo_stmt_00000001" requires 4
+07/03/2022-22:27:52--SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 3 parameters, but prepared statement "pdo_stmt_00000001" requires 4

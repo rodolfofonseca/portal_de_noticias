@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>ASSPOL - Associação Polícial</title>
@@ -23,7 +24,7 @@
         /**
          * Função que se repete a cada segundo e adiciona na tela o tempo de hoje.
          */
-        function iniciar_hora(){
+        function iniciar_hora() {
             var data_e_hora = new Date();
             semana = new Array("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado");
             mes = new Array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
@@ -33,34 +34,45 @@
             hora = adicionar_zero(hora);
             minutos = adicionar_zero(minutos);
             segundos = adicionar_zero(segundos);
-            var tempo = semana[data_e_hora.getDay()] + ", "+ data_e_hora.getDate() + " de " + mes[data_e_hora.getMonth()] + " de " + data_e_hora.getFullYear() + " " + hora + ":" + minutos + ":" + segundos;
+            var tempo = semana[data_e_hora.getDay()] + ", " + data_e_hora.getDate() + " de " + mes[data_e_hora.getMonth()] + " de " + data_e_hora.getFullYear() + " " + hora + ":" + minutos + ":" + segundos;
             document.getElementById('hora_div').innerHTML = tempo;
             t = setTimeout('iniciar_hora()', 500);
         }
         /**
          * Função responsável por verificar se o tempo é < 10 e adicionar um zero na frente para facilitar a visualização do mes,p
          */
-        function adicionar_zero(tempo){
-            if(tempo<10){
-                tempo = "0"+tempo;
+        function adicionar_zero(tempo) {
+            if (tempo < 10) {
+                tempo = "0" + tempo;
             }
             return tempo;
         }
     </script>
 </head>
+
 <body onload="iniciar_hora()">
-<?php
-require_once 'controller/utilidades/Data.php';
-$dataSistema = new Data();
-?>
+    <?php
+    require_once 'controller/utilidades/Data.php';
+    include_once 'controller/TituloDestaqueCtr.php';
+    include_once 'controller/MenuCtr.php';
+    include_once 'controller/CategoriaCtr.php';
+    $dataSistema = new Data();
+    ?>
     <div class="container-fluid">
         <div class="row align-items-center bg-light px-lg-5">
             <div class="col-12 col-md-8">
                 <div class="d-flex justify-content-between">
                     <div class="bg-primary text-white text-center py-2" style="width: 100px;">Notícias</div>
                     <div class="owl-carousel owl-carousel-1 tranding-carousel position-relative d-inline-flex align-items-center ml-3" style="width: calc(100% - 100px); padding-left: 90px;">
-                        <div class="text-truncate"><a class="text-secondary" href="">Avião venezuelano pousa em Campinas com toneladas de agrotóxicos.</a></div>
-                        <div class="text-truncate"><a class="text-secondary" href="">Moody’s mantém nota de risco da Embraer e retira perspectiva negativa</a></div>
+                        <?php
+                        $tituloDestaque = new tituloDestaqueCtr();
+                        $retorno = $tituloDestaque->Pesquisar("select noticias.titulo_noticias, noticias.link_materia from titulo_destaque, noticias where titulo_destaque.id_materia = noticias.id_noticias and titulo_destaque.status = 'A' order by noticias.titulo_noticias;");
+                        foreach ($retorno as $destaques) {
+                        ?>
+                            <div class="text-truncate"><a class="text-secondary" href="materia.php?link_materia=<?php echo $destaques['link_materia']; ?>"><?php echo $destaques['titulo_noticias']; ?></a></div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -82,18 +94,34 @@ $dataSistema = new Data();
             <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
                     <a href="index.php" class="nav-item nav-link active">Home</a>
-                    <a href="#" class="nav-item nav-link">Cidadania</a>
-                    <a href="#" class="nav-item nav-link">Aviação</a>
-                    <!--
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            <a href="#" class="dropdown-item">Menu item 1</a>
-                            <a href="#" class="dropdown-item">Menu item 2</a>
-                            <a href="#" class="dropdown-item">Menu item 3</a>
-                        </div>
-                    </div>-->
-                            <a href="$" class="nav-item nav-link">Contato</a>
+                    <?php
+                    $menu = new MenuCtr();
+                    $menu_retorno = $menu->Pesquisar("select * from menu where aparece_menu = 'S' order by descricao_menu;");
+                    $categoria = new CategoriaCtr();
+                    foreach ($menu_retorno as $menuRetorno) {
+                        if ($menuRetorno['tem_sub_menu'] == 'S') {
+                            $retorno_categoria = $categoria->Pesquisar("select * from categoria, menu where categoria.id_menu_categoria = menu.id_menu and categoria.aparece_menu = 'S' and categoria.id_menu_categoria = '" . $menuRetorno['id_menu'] . "' order by categoria.descricao_categoria;");
+                    ?>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><?php echo $menuRetorno['descricao_menu'] ?></a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <?php
+                                    foreach ($retorno_categoria as $categoriaRetorno) {
+                                    ?>
+                                        <a href="#" class="dropdown-item"><?php echo $categoriaRetorno['descricao_categoria']; ?></a>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        <?php
+                        } else {
+                        ?>
+                            <a href="#" class="nav-item nav-link"><?php echo $menuRetorno['descricao_menu']; ?></a>
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
                 <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
                     <input type="text" class="form-control" placeholder="Pesquisar">

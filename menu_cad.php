@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $controller = new MenuCtr();
         $model->setDescricaoMenu((string) $_POST['descricao_menu']);
         $model->setApareceMenu((string) $_POST['aparece_menu_menu']);
+        $model->setTemSubMenu((string) $_POST['tem_sub_menu']);
         if ($controller->Salvar($model) == true) {
 ?><script>
                 Swal.fire({
@@ -39,17 +40,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="contact-form bg-light mb-3" style="padding: 30px;">
                     <form method="POST" accept="menu_cad.php">
                         <div class="form-row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="descricao_menu">Descrição</label>
                                     <input type="text" name="descricao_menu" id="descricao_menu" placeholder="Descrição do menu" required data-validation-required-message="Informe a descrição do menu" class="form-control"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="aparece_menu_menu">Aparece no menu?</label>
                                     <select name="aparece_menu_menu" id="aparece_menu_menu" class="form-control">
+                                        <option value="S">SIM</option>
+                                        <option value="N">NÃO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="tem_sub_menu">Tem Sub Menu?</label>
+                                    <select name="tem_sub_menu" id="tem_sub_menu" class="form-control">
                                         <option value="S">SIM</option>
                                         <option value="N">NÃO</option>
                                     </select>

@@ -9,7 +9,8 @@ create table usuario(
 create table menu(
 	id_menu serial not null primary key,
 	descricao_menu varchar(15) not null,
-	aparece_menu_menu varchar(1) not null
+	aparece_menu_menu varchar(1) not null,
+	tem_sub_menu varchar(1) not null
 );
 create table categoria(
 	id_categoria serial not null primary key,
@@ -92,3 +93,5 @@ create table anuncios
 	status varchar(1) not null,
 	local_imagem varchar(255) not null
 );
+
+alter table menu add tem_sub_menu varchar(1);

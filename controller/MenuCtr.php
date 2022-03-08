@@ -12,8 +12,8 @@ class MenuCtr{
     }
     public function Salvar($model){
         try{
-            $dados = array($model->getDescricaoMenu(), $model->getApareceMenu());
-            return $this->dao->Salvar('menu', 'descricao_menu, aparece_menu_menu', $dados);
+            $dados = array($model->getDescricaoMenu(), $model->getApareceMenu(), $model->getTemSubMenu());
+            return $this->dao->Salvar('menu', 'descricao_menu, aparece_menu_menu, tem_sub_menu', $dados);
         }catch(Exception $ex){
             $this->log->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             return false;
@@ -21,8 +21,8 @@ class MenuCtr{
     }
     public function Alterar($model){
         try{
-            $dados = array($model->getDescricaoMenu(), $model->getApareceMenu(), $model->getIdMenu());
-            $campos = array('descricao_menu', 'aparece_menu_menu');
+            $dados = array($model->getDescricaoMenu(), $model->getApareceMenu(), $model->getTemSubMenu(),$model->getIdMenu());
+            $campos = array('descricao_menu', 'aparece_menu_menu', 'tem_sub_menu');
             return $this->dao->Alterar('menu', $campos, $dados, 'id_menu');
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
@@ -35,6 +35,13 @@ class MenuCtr{
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             return array();
+        }
+    }
+    public function ExcutarComando($comando){
+        try{
+            $this->dao->ExecutarComando($comando);
+        }catch(Exception $ex){
+            $this->logDoSistema->EscreverArquivo($ex->getMessage());
         }
     }
 }

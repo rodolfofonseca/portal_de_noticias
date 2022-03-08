@@ -2,7 +2,7 @@
 require_once 'controller/utilidades/DAO.php';
 require_once 'controller/utilidades/LogDoSistema.php';
 require_once 'controller/modelos/TituloDestaque.php';
-class tituloDestaqueCtr{
+class TituloDestaqueCtr{
     private $dao = NULL;
     private $logDoSistema = NULL;
     public function __construct()
