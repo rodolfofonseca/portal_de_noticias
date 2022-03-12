@@ -110,6 +110,5 @@ if (empty($retorno_noticias) == false) {
         </div>
 <?php
     }
-}
 require_once './includes/footer.php';
 ?>
