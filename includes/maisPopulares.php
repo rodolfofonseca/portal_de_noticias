@@ -12,6 +12,17 @@
                     <?php
                     $materiaCtr = new NoticiasCtr();
                     $contador = (int) 0;
+                    $retorno_ancuncios_internos = $materiaCtr->Pesquisar("select * from anuncios where status = 'A' and id_locais = '1' order by id_anuncio asc limit 5;");
+                    $anuncios = array();
+                    $contadorAnuncios = (int) 0;
+                    $tamanhoAnuncios = (int) 0;
+                    if(empty($retorno_ancuncios_internos) == false){
+                        foreach($retorno_ancuncios_internos as $retorno_ancuncios_interno){
+                            $anuncios[$contadorAnuncios]['local_imagem'] = $retorno_ancuncios_interno['local_imagem'];
+                            $contadorAnuncios++;
+                        }
+                        $tamanhoAnuncios = count($anuncios);
+                    }
                     $pesquisa = $materiaCtr->Pesquisar("select * from noticias where status = 'A' order by id_noticias desc limit 20;");
                     if (empty($pesquisa) == false) {
                         foreach ($pesquisa as $retorno) {
@@ -51,17 +62,76 @@
                             </div>
                             <?php
                             if ($contador % 2 == 0) {
-                            ?>
-                </div>
-                <div class="mb-3 pb-3">
-                    <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""></a>
-                </div>
-                <div class="row">
-        <?php
+                                if($tamanhoAnuncios == 1){
+                                    if($tamanhoAnuncios==1){
+                                        ?>
+                                    </div>
+                                        <div class="mb-3 pb-3">
+                                            <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[0]['local_imagem']; ?>" alt=""></a>
+                                        </div>
+                                    <div class="row">
+                                    <?php
+                                    }
+                                    if($tamanhoAnuncios == 2){
+                                        if($contadorAnuncios < 2){
+                                            ?>
+                                            </div>
+                                            <div class="mb-3 pb-3">
+                                                <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
+                                            </div>
+                                        </div>
+                                            <?php
+                                            $contadorAnuncios++;
+                                            if($contadorAnuncios == 2){
+                                                $contadorAnuncios = 0;
+                                            }
+                                        }
+                                    }
+                                    if($tamanhoAnuncios == 3){
+                                        if($contadorAnuncios < 3){
+                                            ?>
+                                            </div>
+                                            <div class="mb-3 pb-3">
+                                                <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
+                                            </div>
+                                        </div>
+                                            <?php
+                                            $contadorAnuncios++;
+                                            if($contadorAnuncios == 3){
+                                                $contadorAnuncios = 0;
+                                            }
+                                        }
+                                    }
+                                    if($tamanhoAnuncios == 4){
+                                        if($contadorAnuncios < 4){
+                                            ?>
+                                            </div>
+                                            <div class="mb-3 pb-3">
+                                                <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
+                                            </div>
+                                        </div>
+                                            <?php
+                                            $contadorAnuncios++;
+                                            if($contadorAnuncios == 2){
+                                                $contadorAnuncios = 0;
+                                            }
+                                        }
+                                    }
+                                    if($tamanhoAnuncios == 5){
+                                            ?>
+                                            </div>
+                                            <div class="mb-3 pb-3">
+                                                <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
+                                            </div>
+                                        </div>
+                                            <?php
+                                            $contadorAnuncios++;
+                                        }
+                                    }                                    
+                                }
                             }
                         }
-                    }
-        ?>
+                    ?>
                 </div>
             </div>
             <?php require_once './includes/redesSociais.php'; ?>
