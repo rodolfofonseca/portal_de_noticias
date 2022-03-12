@@ -66,4 +66,23 @@ class Data{
         $tmp = str_ireplace('/', '-', $tmp);
         return $tmp;
     }
+    /**
+     * Retorna a data completa Ex Sábado, 11 de Março de 2022.
+     * @author Rodolfo Fonseca
+     * @version 1.0
+     * @since 11/03/2022
+     * @param (string) data
+     * @return (string) dataConvertida
+     */
+    public function RetornarDataCompleta($data){
+        $data = (string) Data::ConverteData($data);
+        $dia_semana = array('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado');
+        $mes_ano = array('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
+        $dia_semana_numero = date('w', strtotime($data));
+        $mes_numero = (int)date('m');
+        $data = (string) Data::ConverteData($data);
+        $dia = substr($data, 0, 2);
+        $ano = substr($data, 6, 4);
+        echo $dia_semana[$dia_semana_numero].', '.$dia.' de '.$mes_ano[$mes_numero].' de '.$ano;
+    }
 }

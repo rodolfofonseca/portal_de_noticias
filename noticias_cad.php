@@ -100,7 +100,7 @@ function ajuda(){
 function linkMateria(){
     let link = document.getElementById('titulo').value;
     link = link.replaceAll(' ', '_');
-    document.getElementById('link_materia').value = link;
+    document.getElementById('link_materia').value = link.toLowerCase();
 } 
 </script>
 <div class="container-fluid py-3">

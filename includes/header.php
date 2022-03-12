@@ -1,6 +1,14 @@
+<?php
+require_once 'controller/utilidades/Data.php';
+include_once 'controller/TituloDestaqueCtr.php';
+include_once 'controller/MenuCtr.php';
+include_once 'controller/CategoriaCtr.php';
+include_once 'controller/NoticiasCtr.php';
+include_once 'controller/ParagrafoCtr.php';
+$dataSistema = new Data();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <title>ASSPOL - Associação Polícial</title>
@@ -51,13 +59,6 @@
 </head>
 
 <body onload="iniciar_hora()">
-    <?php
-    require_once 'controller/utilidades/Data.php';
-    include_once 'controller/TituloDestaqueCtr.php';
-    include_once 'controller/MenuCtr.php';
-    include_once 'controller/CategoriaCtr.php';
-    $dataSistema = new Data();
-    ?>
     <div class="container-fluid">
         <div class="row align-items-center bg-light px-lg-5">
             <div class="col-12 col-md-8">

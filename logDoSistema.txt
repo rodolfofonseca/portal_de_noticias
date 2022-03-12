@@ -1,3 +1,4 @@
 
-07/03/2022-22:26:39--SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 3 parameters, but prepared statement "pdo_stmt_00000001" requires 4
-07/03/2022-22:27:52--SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 3 parameters, but prepared statement "pdo_stmt_00000001" requires 4
+11/03/2022-22:43:50--SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type integer: ""
+LINE 1: select * from paragrafos where id_noticia = '';
+                                                    ^
