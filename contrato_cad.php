@@ -101,8 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     $retorno_anuncios = $anunciosCtr->Salvar($anuncios);
                                 }
                             }
-                            $imagem_contador = $imagem_contador + 1;
+                            
                         }
+                        $imagem_contador = $imagem_contador + 1;
                     }
                     if ($retorno_anuncios == true) {
 ?>
@@ -272,7 +273,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $retorno = $locaisCtr->Pesquisar('select * from locais order by descricao;');
+                                        $retorno = $locaisCtr->Pesquisar('select * from locais order by id_local;');
                                         foreach ($retorno as $locais) {
                                         ?>
                                             <tr>

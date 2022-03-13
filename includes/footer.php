@@ -2,7 +2,7 @@
     <div class="row">
         <?php
         $noticiaCtr = new NoticiasCtr();
-        $retornoFooter = $noticiaCtr->Pesquisar("");
+        $retornoFooter = $noticiaCtr->Pesquisar("select * from anuncios where status = 'A' and id_locais = '3' order by id_anuncio asc limit 2;");
         if(empty($retornoFooter) == false){
             foreach($retornoFooter as $retorno){
                 ?>
@@ -15,7 +15,7 @@
                 <?php
             }
         }
-        ?>iv>
+        ?>
         </div>
         <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Links Rápidos</h4>

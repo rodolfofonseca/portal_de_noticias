@@ -5,7 +5,7 @@
         </div>
         <?php
         $materiaCtr = new NoticiasCtr();
-        $retornoPatrocinadores = $materiaCtr->Pesquisar("");
+        $retornoPatrocinadores = $materiaCtr->Pesquisar("select * from anuncios where status = 'A' and id_locais = '2' order by id_anuncio asc limit 5;");
         if(empty($retornoPatrocinadores) == false){
             foreach($retornoPatrocinadores as $retorno){
                 ?>
