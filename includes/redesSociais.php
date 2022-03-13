@@ -3,12 +3,20 @@
         <div class="bg-light py-2 px-4 mb-3">
             <h3 class="m-0">Patrocinadores</h3>
         </div>
+        <?php
+        $materiaCtr = new NoticiasCtr();
+        $retornoPatrocinadores = $materiaCtr->Pesquisar("");
+        if(empty($retornoPatrocinadores) == false){
+            foreach($retornoPatrocinadores as $retorno){
+                ?>
+                
         <div class="mb-3 pb-3">
-            <a href=""><img class="img-fluid" src="img/anunciante300x300.jpg" alt=""></a>
+            <a href=""><img class="img-fluid" src="<?php echo $retorno['local_imagem']; ?>" alt=""></a>
         </div>
-        <div class="mb-3 pb-3">
-            <a href=""><img class="img-fluid" src="img/anunciante300x300.jpg" alt=""></a>
-        </div>
+                <?php
+            }
+        }
+        ?>
     </div>
     <div class="pb-3">
         <div class="bg-light py-2 px-4 mb-3">

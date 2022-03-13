@@ -1,22 +1,21 @@
 <div class="container-fluid bg-light pt-5 px-sm-3 px-md-5">
     <div class="row">
-        <div class="col-lg-3 col-md-6 mb-5">
+        <?php
+        $noticiaCtr = new NoticiasCtr();
+        $retornoFooter = $noticiaCtr->Pesquisar("");
+        if(empty($retornoFooter) == false){
+            foreach($retornoFooter as $retorno){
+                ?>
+            <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Patrocinador</h4>
             <div class="d-flex flex-wrap m-n1">
-            <img src="img/anunciante300x300.jpg" />
-            </div>
-            </div>
-        <div class="col-lg-3 col-md-6 mb-5">
-            <h4 class="font-weight-bold mb-4">Patrocinador</h4>
-            <div class="d-flex flex-wrap m-n1">
-            <img src="img/anunciante300x300.jpg" />
+            <img src="<?php echo $retorno['local_imagem']; ?>" />
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5">
-            <h4 class="font-weight-bold mb-4">Patrocinador</h4>
-            <div class="d-flex flex-wrap m-n1">
-            <img src="img/anunciante300x300.jpg" />
-            </div>
+                <?php
+            }
+        }
+        ?>iv>
         </div>
         <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Links Rápidos</h4>
