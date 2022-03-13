@@ -35,6 +35,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             ?>
             <script type="text/javascript">
                 Swal.fire({icon:'success', title:'Sucesso', Text:'Operação realizada com sucesso!'});
+                setTimeout(function() {
+    window.location.href = "noticias_cad.php";
+}, 1000);
             </script>
             <?php
         }

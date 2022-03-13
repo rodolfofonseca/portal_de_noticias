@@ -229,15 +229,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <label for="categoria">Categoria</label>
                                 <select name="categoria" id="categoria" class="form-control">
                                     <?php
-                                    $retorno_categoria = $categoriaCtr->Pesquisar("select * from categoria where aparece_menu = 'S' order by descricao_categoria;");
+                                    $retorno_categoria = $categoriaCtr->Pesquisar("select categoria.id_categoria, categoria.descricao_categoria, menu.descricao_menu from categoria, menu where aparece_menu = 'S' and categoria.id_menu_categoria = menu.id_menu order by descricao_categoria;");
                                     foreach ($retorno_categoria as $categoria_retorno) {
                                         if ($model->getCategoria()->getIdCategoria() == $categoria_retorno['id_categoria']) {
                                     ?>
-                                            <option value="<?php echo $categoria_retorno['id_categoria']; ?>" selected><?php echo $categoria_retorno['descricao_categoria']; ?></option>
+                                            <option value="<?php echo $categoria_retorno['id_categoria']; ?>" selected><?php echo $categoria_retorno['descricao_menu'].' / '.$categoria_retorno['descricao_categoria']; ?></option>
                                         <?php
                                         } else {
                                         ?>
-                                            <option value="<?php echo $categoria_retorno['id_categoria']; ?>"><?php echo $categoria_retorno['descricao_categoria']; ?></option>
+                                            <option value="<?php echo $categoria_retorno['id_categoria']; ?>"><?php echo $categoria_retorno['descricao_menu'].' / '.$categoria_retorno['descricao_categoria']; ?></option>
                                     <?php
                                         }
                                     }

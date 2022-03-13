@@ -1,19 +1,15 @@
+Colocar telefones de emergência
+Colocar previção do tempo
 
-11/03/2022-22:43:50--SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type integer: ""
-LINE 1: select * from paragrafos where id_noticia = '';
-                                                    ^
-13/03/2022-12:55:09--SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "paragrados" does not exist
-LINE 1: select * from paragrados where id_noticia = '9' order by id_...
-                      ^
-13/03/2022-12:55:22--SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "paragrados" does not exist
-LINE 1: select * from paragrados where id_noticia = '15' order by id...
-                      ^
-13/03/2022-13:00:29--SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "paragrados" does not exist
-LINE 1: select * from paragrados where id_noticia = '15' order by id...
-                      ^
-13/03/2022-13:01:15--SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "paragrados" does not exist
-LINE 1: select * from paragrados where id_noticia = '15' order by id...
-                      ^
-13/03/2022-13:01:18--SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "paragrados" does not exist
-LINE 1: select * from paragrados where id_noticia = '15' order by id...
-                      ^
+
+Propagandas
+Colégio atendeu
+clinger Med do centro do calendário
+
+Gavião virabrekin vai para o lado
+
+placas de veículos para licenciamento
+Fazer tipo classificados -> Jales por empresas.
+Compania da polícia.
+
+Clicar em cima da propaganda e redirecionar para uma página que cai na localização e telefones site e facebook e instagram

@@ -6,11 +6,9 @@ if (empty($_GET['link_materia']) == false) {
     $link_materia = $_GET['link_materia'];
 }
 $contador = (int) 0;
-$contadorParagrafo = (int) 1;
 $retorno_noticias = $materiaCtr->Pesquisar("select * from noticias where link_materia = '" . $link_materia . "';");
 if (empty($retorno_noticias) == false) {
     foreach ($retorno_noticias as $noticia) {
-        $contador++;
         $descricao_categoria = (string) '';
         $id_categoria = (int) 0;
         $categoria_retorno = $materiaCtr->Pesquisar("select * from categoria where id_categoria = '" . $noticia['id_categoria'] . "';");
@@ -56,46 +54,57 @@ if (empty($retorno_noticias) == false) {
                                     $paragrafos_retorno = $materiaCtr->Pesquisar("select * from paragrafos where id_noticia = '".$noticia['id_noticias']."' order by id_paragrafo asc;");
                                     if(empty($paragrafos_retorno) == false){
                                         foreach($paragrafos_retorno as $paragrafos){
-                                            if($contadorParagrafo == 1 && $contador == 0){
-                                                ?>
+                                            if($contador%2!=0){
+                                                if($paragrafos['antes_depois'] == '-'){
+                                                    ?>
+                                                <p><?php echo $paragrafos['paragrafo']; ?></p>
+                                                <?php
+                                                }
+                                                if($paragrafos['antes_depois'] == 'A'){
+                                                    ?>
                                                 <div class="mb-3 pb-3">
                                                     <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""/></a>
                                                 </div>
-                                                <!--
-                                                Imagem que aparece no meio do texto na lateral direita refenrênta a matéria
-                                                <h4 class="mb-3">Est dolor lorem et ea</h4>
-                                                <img class="img-fluid w-50 float-left mr-4 mb-2" src="img/news-500x280-1.jpg">
-                                                -->
+                                                <img class="img-fluid w-50 float-left mr-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
                                                 <p><?php echo $paragrafos['paragrafo']; ?></p>
-                                                <!--
-                                                Imagem que aparece no meio do texto na lateral esquerda referênte a matéria
-                                                <h5 class="mb-3">Est dolor lorem et ea</h5>
-                                                <img class="img-fluid w-50 float-right ml-4 mb-2" src="img/news-500x280-2.jpg"> --> 
                                                 <?php
+                                                }
+                                                if($paragrafos['antes_depois'] == 'D'){
+                                                    ?>
+                                                <div class="mb-3 pb-3">
+                                                    <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""/></a>
+                                                </div>
+                                                <p><?php echo $paragrafos['paragrafo']; ?></p>
+                                                <img class="img-fluid w-50 float-left mr-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
+                                                <?php
+                                                }
                                             }else{
                                                 if($contador%2==0){
-                                                    ?>
-                                                <div class="mb-3 pb-3">
-                                                    <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""/></a>
-                                                </div>
-                                                <!--
-                                                Imagem que aparece no meio do texto na lateral direita refenrênta a matéria
-                                                <h4 class="mb-3">Est dolor lorem et ea</h4>
-                                                <img class="img-fluid w-50 float-left mr-4 mb-2" src="img/news-500x280-1.jpg">
-                                                -->
-                                                <p><?php echo $paragrafos['paragrafo']; ?></p>
-                                                <!--
-                                                Imagem que aparece no meio do texto na lateral esquerda referênte a matéria
-                                                <h5 class="mb-3">Est dolor lorem et ea</h5>
-                                                <img class="img-fluid w-50 float-right ml-4 mb-2" src="img/news-500x280-2.jpg"> --> 
-                                                <?php
-                                                }else{
-                                                    ?>
-                                                    <p><?php echo $paragrafos['paragrafo']; ?></p> 
+                                                    if($paragrafos['antes_depois'] == '-'){
+                                                        ?>
+                                                    <p><?php echo $paragrafos['paragrafo']; ?></p>
                                                     <?php
+                                                    }
+                                                    if($paragrafos['antes_depois'] == 'A'){
+                                                        ?>
+                                                    <div class="mb-3 pb-3">
+                                                        <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""/></a>
+                                                    </div>
+                                                    <img class="img-fluid w-50 float-right mr-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
+                                                    <p><?php echo $paragrafos['paragrafo']; ?></p>
+                                                    <?php
+                                                    }
+                                                    if($paragrafos['antes_depois'] == 'D'){
+                                                        ?>
+                                                    <div class="mb-3 pb-3">
+                                                        <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""/></a>
+                                                    </div>
+                                                    <p><?php echo $paragrafos['paragrafo']; ?></p>
+                                                    <img class="img-fluid w-50 float-left ml-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
+                                                    <?php
+                                                    }
                                                 }
                                             }
-                                            $contadorParagrafo++;
                                             $contador++;
                                         }
                                     }

@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             $tituloDestaqueCtr = new tituloDestaqueCtr();
             $tituloDestaqueModel->setMateria($noticiasModel);
+            $tituloDestaqueModel->setStatus('A');
             if($tituloDestaqueCtr->Salvar($tituloDestaqueModel) == true){
                 $_SESSION['noticia'] = $noticiasModel->getIdNoticia();
                 $_SESSION['quantidade_paragafos'] = $quantidadeParagrafo;
@@ -137,10 +138,10 @@ function linkMateria(){
                             <label for="categoria">Categoria</label>
                             <select name="categoria" id="categoria" class="form-control">
                                 <?php
-                                $retorno_categoria = $categoriaCtr->Pesquisar("select * from categoria where aparece_menu = 'S' order by descricao_categoria;");
+                                $retorno_categoria = $categoriaCtr->Pesquisar("select categoria.id_categoria, categoria.descricao_categoria, menu.descricao_menu from categoria, menu where aparece_menu = 'S' and categoria.id_menu_categoria = menu.id_menu order by descricao_categoria;");
                                 foreach($retorno_categoria as $categoria_retorno){
                                     ?>
-                                    <option value="<?php echo $categoria_retorno['id_categoria']; ?>"><?php echo $categoria_retorno['descricao_categoria']; ?></option>
+                                    <option value="<?php echo $categoria_retorno['id_categoria']; ?>"><?php echo $categoria_retorno['descricao_menu'].' / '.$categoria_retorno['descricao_categoria']; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -155,7 +156,7 @@ function linkMateria(){
                         </div>
                         <div class="col-md-2">
                             <label for="hora_inicio">Hora de início</label>
-                            <input type="number" name="hora_inicio" id="hora_inicio" class="form-control"  placeholder="00" required/>
+                            <input type="number" name="hora_inicio" id="hora_inicio" class="form-control"  placeholder="00" required value="00"/>
                         </div>
                         <div class="col-md-3">
                             <label for="data_fim">Data Fim</label>
@@ -163,7 +164,7 @@ function linkMateria(){
                         </div>
                         <div class="col-md-2">
                             <label for="hora_fim">Hora fim</label>
-                            <input type="number" name="hora_fim" id="hora_fim" class="form-control" required placeholder="00"/>
+                            <input type="number" name="hora_fim" id="hora_fim" class="form-control" required placeholder="00" value="00"/>
                         </div>
                         <div class="col-md-2">
                             <label>Precisa de ajuda?</label>

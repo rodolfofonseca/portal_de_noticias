@@ -12,7 +12,7 @@ class TituloDestaqueCtr{
     }
     public function Salvar($model){
         try{
-            $dados = array($model->getMateria()->getIdNoticia(), $model->getDataInicio(), $model->getDataFim(), $model->getHoraInicio(), $model->getHoraFim(), $model->getStatus);
+            $dados = array($model->getMateria()->getIdNoticia(), $model->getDataInicio(), $model->getDataFim(), $model->getHoraInicio(), $model->getHoraFim(), $model->getStatus());
             return $this->dao->Salvar('titulo_destaque', 'id_materia, data_inicio, data_fim, hora_inicio, hora_fim, status', $dados);
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());

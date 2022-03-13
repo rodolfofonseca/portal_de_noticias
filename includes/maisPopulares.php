@@ -38,7 +38,7 @@
                             $retorno_paragrado = $materiaCtr->Pesquisar("select * from paragrafos where id_noticia = '" . $retorno['id_noticias'] . "' limit 1;");
                             if (empty($retorno_paragrado) == false) {
                                 foreach ($retorno_paragrado as $paragrafo) {
-                                    $descricao_paragrafo = $paragrafo['paragrafo'];
+                                    $descricao_paragrafo = substr($paragrafo['paragrafo'], 0, 150);
                                 }
                             }
                     ?>
@@ -55,19 +55,18 @@
                                                 ?>
                                             </span>
                                         </div>
-                                        <a class="h6" href="materia.php?link_materia=<?php echo $retorno['link_materia']; ?>"><?php echo $retorno['titulo_noticias']; ?></a>
+                                        <a class="h6" href="materia.php?link_materia=<?php echo $retorno['link_materia']; ?>"><?php echo substr($retorno['titulo_noticias'], 0, 80); ?></a>
                                         <p class="m-0"><?php echo $descricao_paragrafo; ?></p>
                                     </div>
                                 </div>
                             </div>
                             <?php
                             if ($contador % 2 == 0) {
-                                if($tamanhoAnuncios == 1){
                                     if($tamanhoAnuncios==1){
                                         ?>
                                     </div>
                                         <div class="mb-3 pb-3">
-                                            <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[0]['local_imagem']; ?>" alt=""></a>
+                                            <a href=""><img class="imagem_anuncio_central w-100" src="<?php echo $anuncios[0]['local_imagem']; ?>" alt=""></a>
                                         </div>
                                     <div class="row">
                                     <?php
@@ -77,7 +76,7 @@
                                             ?>
                                             </div>
                                             <div class="mb-3 pb-3">
-                                                <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
+                                                <a href=""><img class="imagem_anuncio_central w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
                                             </div>
                                         </div>
                                             <?php
@@ -92,7 +91,7 @@
                                             ?>
                                             </div>
                                             <div class="mb-3 pb-3">
-                                                <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
+                                                <a href=""><img class="imagem_anuncio_central w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
                                             </div>
                                         </div>
                                             <?php
@@ -107,7 +106,7 @@
                                             ?>
                                             </div>
                                             <div class="mb-3 pb-3">
-                                                <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
+                                                <a href=""><img class="imagem_anuncio_central w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
                                             </div>
                                         </div>
                                             <?php
@@ -121,13 +120,12 @@
                                             ?>
                                             </div>
                                             <div class="mb-3 pb-3">
-                                                <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
+                                                <a href=""><img class="imagem_anuncio_central w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
                                             </div>
                                         </div>
                                             <?php
                                             $contadorAnuncios++;
-                                        }
-                                    }                                    
+                                        }                               
                                 }
                             }
                         }

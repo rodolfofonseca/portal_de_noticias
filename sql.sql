@@ -53,7 +53,7 @@ create table locais
 create table empresa
 (
 	id_empresa serial not null primary key,
-	nome_empresa varchar(25) not null,
+	nome_empresa varchar(50) not null,
 	telefone_contato varchar(15),
 	whatsapp varchar(15),
 	observacoes text,
@@ -93,5 +93,3 @@ create table anuncios
 	status varchar(1) not null,
 	local_imagem varchar(255) not null
 );
-
-alter table menu add tem_sub_menu varchar(1);
