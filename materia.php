@@ -51,57 +51,69 @@ if (empty($retorno_noticias) == false) {
                                 <div>
                                     <h3 class="mb-3"><?php echo $noticia['titulo_noticias']; ?></h3>
                                     <?php
-                                    $paragrafos_retorno = $materiaCtr->Pesquisar("select * from paragrafos where id_noticia = '".$noticia['id_noticias']."' order by id_paragrafo asc;");
-                                    if(empty($paragrafos_retorno) == false){
-                                        foreach($paragrafos_retorno as $paragrafos){
-                                            if($contador%2!=0){
-                                                if($paragrafos['antes_depois'] == '-'){
-                                                    ?>
-                                                <p><?php echo $paragrafos['paragrafo']; ?></p>
-                                                <?php
-                                                }
-                                                if($paragrafos['antes_depois'] == 'A'){
-                                                    ?>
-                                                <div class="mb-3 pb-3">
-                                                    <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""/></a>
-                                                </div>
-                                                <img class="img-fluid w-50 float-left mr-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
-                                                <p><?php echo $paragrafos['paragrafo']; ?></p>
-                                                <?php
-                                                }
-                                                if($paragrafos['antes_depois'] == 'D'){
-                                                    ?>
-                                                <div class="mb-3 pb-3">
-                                                    <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""/></a>
-                                                </div>
-                                                <p><?php echo $paragrafos['paragrafo']; ?></p>
-                                                <img class="img-fluid w-50 float-left mr-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
-                                                <?php
-                                                }
-                                            }else{
-                                                if($contador%2==0){
-                                                    if($paragrafos['antes_depois'] == '-'){
-                                                        ?>
+                                    $paragrafos_retorno = $materiaCtr->Pesquisar("select * from paragrafos where id_noticia = '" . $noticia['id_noticias'] . "' order by id_paragrafo asc;");
+                                    if (empty($paragrafos_retorno) == false) {
+                                        $retorno_ancuncios_internos = $materiaCtr->Pesquisar("select * from anuncios where status = 'A' and id_locais = '1' order by id_anuncio asc limit 5;");
+                                        $anuncios = array();
+                                        $contadorAnuncios = (int) 0;
+                                        $tamanhoAnuncios = (int) 0;
+                                        if (empty($retorno_ancuncios_internos) == false) {
+                                            foreach ($retorno_ancuncios_internos as $retorno_ancuncios_interno) {
+                                                $anuncios[$contadorAnuncios]['local_imagem'] = $retorno_ancuncios_interno['local_imagem'];
+                                                $contadorAnuncios++;
+                                            }
+                                            $tamanhoAnuncios = count($anuncios);
+                                        }
+                                        $contadorAnuncios = 0;
+                                        foreach ($paragrafos_retorno as $paragrafos) {
+                                            if ($contador % 2 != 0) {
+                                                if ($paragrafos['antes_depois'] == '-') {
+                                    ?>
                                                     <p><?php echo $paragrafos['paragrafo']; ?></p>
-                                                    <?php
-                                                    }
-                                                    if($paragrafos['antes_depois'] == 'A'){
-                                                        ?>
+                                                <?php
+                                                }
+                                                if ($paragrafos['antes_depois'] == 'A') {
+                                                ?>
                                                     <div class="mb-3 pb-3">
-                                                        <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""/></a>
+                                                        <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>" alt="" /></a>
                                                     </div>
-                                                    <img class="img-fluid w-50 float-right mr-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
+                                                    <img class="img-fluid w-50 float-left mr-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
                                                     <p><?php echo $paragrafos['paragrafo']; ?></p>
-                                                    <?php
-                                                    }
-                                                    if($paragrafos['antes_depois'] == 'D'){
-                                                        ?>
+                                                <?php
+                                                }
+                                                if ($paragrafos['antes_depois'] == 'D') {
+                                                ?>
                                                     <div class="mb-3 pb-3">
-                                                        <a href=""><img class="img-fluid w-100" src="img/anunciante700x70.jpg" alt=""/></a>
+                                                        <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>" alt="" /></a>
                                                     </div>
                                                     <p><?php echo $paragrafos['paragrafo']; ?></p>
-                                                    <img class="img-fluid w-50 float-left ml-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
+                                                    <img class="img-fluid w-50 float-left mr-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
                                                     <?php
+                                                }
+                                            } else {
+                                                if ($contador % 2 == 0) {
+                                                    if ($paragrafos['antes_depois'] == '-') {
+                                                    ?>
+                                                        <p><?php echo $paragrafos['paragrafo']; ?></p>
+                                                    <?php
+                                                    }
+                                                    if ($paragrafos['antes_depois'] == 'A') {
+                                                    ?>
+                                                        <div class="mb-3 pb-3">
+                                                            <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>" alt="" /></a>
+                                                        </div>
+                                                        <img class="img-fluid w-50 float-right mr-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
+                                                        <p><?php echo $paragrafos['paragrafo']; ?></p>
+                                                    <?php
+                                                    }
+                                                    if ($paragrafos['antes_depois'] == 'D') {
+                                                    ?>
+                                                        <div class="mb-3 pb-3">
+                                                            <a href=""><img class="img-fluid w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>" alt="" /></a>
+                                                        </div>
+                                                        <p><?php echo $paragrafos['paragrafo']; ?></p>
+                                                        <img class="img-fluid w-50 float-left ml-4 mb-2" src="<?php echo $paragrafos['imagem'] ?>">
+                                    <?php
                                                     }
                                                 }
                                             }
@@ -119,4 +131,4 @@ if (empty($retorno_noticias) == false) {
     }
 }
 require_once 'includes/footer.php';
-?>
+    ?>

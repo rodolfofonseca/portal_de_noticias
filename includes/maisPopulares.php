@@ -6,11 +6,15 @@
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
                             <h3 class="m-0">Popular</h3>
-                            <a class="text-secondary font-weight-medium text-decoration-none" href="">Ver Todos</a>
+                            <a class="text-secondary font-weight-medium text-decoration-none" href="index.php">Ver Todos</a>
                         </div>
                     </div>
                     <?php
                     $materiaCtr = new NoticiasCtr();
+                    $id_categoria = (int) 0;
+                    if(isset($_GET['categoria'])){
+                        $id_categoria = $_GET['categoria'];
+                    }
                     $contador = (int) 0;
                     $retorno_ancuncios_internos = $materiaCtr->Pesquisar("select * from anuncios where status = 'A' and id_locais = '1' order by id_anuncio asc limit 5;");
                     $anuncios = array();
@@ -23,7 +27,13 @@
                         }
                         $tamanhoAnuncios = count($anuncios);
                     }
-                    $pesquisa = $materiaCtr->Pesquisar("select * from noticias where status = 'A' order by id_noticias desc limit 20;");
+                    $contadorAnuncios = 0;
+                    $pesquisa = array();
+                    if($id_categoria == 0){
+                        $pesquisa = $materiaCtr->Pesquisar("select * from noticias where status = 'A' order by id_noticias desc limit 20;");
+                    }else{
+                        $pesquisa = $materiaCtr->Pesquisar("select * from noticias where status = 'A' and id_categoria = '".$id_categoria."' order by id_noticias desc limit 20;");
+                    }
                     if (empty($pesquisa) == false) {
                         foreach ($pesquisa as $retorno) {
                             $contador++;
@@ -78,7 +88,7 @@
                                             <div class="mb-3 pb-3">
                                                 <a href=""><img class="imagem_anuncio_central w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
                                             </div>
-                                        </div>
+                                            <div class="row">
                                             <?php
                                             $contadorAnuncios++;
                                             if($contadorAnuncios == 2){
@@ -93,7 +103,7 @@
                                             <div class="mb-3 pb-3">
                                                 <a href=""><img class="imagem_anuncio_central w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
                                             </div>
-                                        </div>
+                                            <div class="row">
                                             <?php
                                             $contadorAnuncios++;
                                             if($contadorAnuncios == 3){
@@ -108,7 +118,7 @@
                                             <div class="mb-3 pb-3">
                                                 <a href=""><img class="imagem_anuncio_central w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
                                             </div>
-                                        </div>
+                                            <div class="row">
                                             <?php
                                             $contadorAnuncios++;
                                             if($contadorAnuncios == 2){
@@ -122,7 +132,7 @@
                                             <div class="mb-3 pb-3">
                                                 <a href=""><img class="imagem_anuncio_central w-100" src="<?php echo $anuncios[$contadorAnuncios]['local_imagem']; ?>"/></a>
                                             </div>
-                                        </div>
+                                            <div class="row">
                                             <?php
                                             $contadorAnuncios++;
                                         }                               

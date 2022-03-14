@@ -109,7 +109,7 @@ $dataSistema = new Data();
                                     <?php
                                     foreach ($retorno_categoria as $categoriaRetorno) {
                                     ?>
-                                        <a href="#" class="dropdown-item"><?php echo $categoriaRetorno['descricao_categoria']; ?></a>
+                                        <a href="categorias.php?categoria=<?php echo $categoriaRetorno['id_categoria']; ?>" class="dropdown-item"><?php echo $categoriaRetorno['descricao_categoria']; ?></a>
                                     <?php
                                     }
                                     ?>
@@ -118,7 +118,7 @@ $dataSistema = new Data();
                         <?php
                         } else {
                         ?>
-                            <a href="#" class="nav-item nav-link"><?php echo $menuRetorno['descricao_menu']; ?></a>
+                            <a href="categorias.php?categoria=<?php echo $categoriaRetorno['id_categoria']; ?>" class="nav-item nav-link"><?php echo $menuRetorno['descricao_menu']; ?></a>
                     <?php
                         }
                     }
