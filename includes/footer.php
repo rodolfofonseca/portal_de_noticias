@@ -2,14 +2,14 @@
     <div class="row">
         <?php
         $noticiaCtr = new NoticiasCtr();
-        $retornoFooter = $noticiaCtr->Pesquisar("select * from anuncios where status = 'A' and id_locais = '3' order by id_anuncio asc limit 2;");
+        $retornoFooter = $noticiaCtr->Pesquisar("select * from anuncios where status = 'A' and id_locais = '3' order by id_anuncio desc limit 4;");
         if(empty($retornoFooter) == false){
             foreach($retornoFooter as $retorno){
                 ?>
             <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Patrocinador</h4>
             <div class="d-flex flex-wrap m-n1">
-            <img src="<?php echo $retorno['local_imagem']; ?>" />
+            <img src="<?php echo $retorno['local_imagem']; ?>" class="img-fluid"/>
             </div>
         </div>
                 <?php
