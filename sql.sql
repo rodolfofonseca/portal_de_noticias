@@ -93,3 +93,10 @@ create table anuncios
 	status varchar(1) not null,
 	local_imagem varchar(255) not null
 );
+
+create table contado
+(
+	id_email serial not null primary key,
+	email_contato varchar(255) not null unique,
+	status varchar(1) not null
+);
