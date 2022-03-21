@@ -44,5 +44,17 @@ class UsuarioCtr{
             return '';
         }
     }
+    /**
+     * Método responsável por salvar os dados para contato por email, sempre que é realizado o cadastro de novas matérias.
+     */
+    public function SalvarContato($model){
+        try{
+            $dados = array($model->getEmailUsuario(), $model->getStatusUsuario());
+            return $this->dao->Salvar('contato', 'email_contato, status', $dados);
+        }catch(Exception $ex){
+            echo $ex->getMessage();
+            return false;
+        }
+    }
 }
 ?>

@@ -1,7 +1,7 @@
 <script>
     function cadastrarEmail(){
         let email_contato = document.querySelector('#email').value;
-        alert(email_contato);
+        window.open('assinatura.php?email='+email_contato, '_BLANCK');
     }
 </script>
 <div class="col-lg-4 pt-3 pt-lg-0">
