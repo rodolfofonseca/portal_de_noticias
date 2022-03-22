@@ -23,4 +23,6 @@ e localização se tiver
 
 finalizar pesquisa e alteração de contratos
 
-                    ^
+
+22/03/2022-06:37:29--SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "contado_email_contato_key"
+DETAIL:  Key (email_contato)=(rodolfo.fonseca01@fatec.sp.gov.br) already exists.
