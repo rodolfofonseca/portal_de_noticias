@@ -57,7 +57,14 @@ create table empresa
 	telefone_contato varchar(15),
 	whatsapp varchar(15),
 	observacoes text,
-	status varchar(1) not null
+	status varchar(1) not null,
+	id_rua int not null references rua(id_rua),
+	numero varchar(5) not null,
+	facebook varchar(255),
+	instagram varchar(255),
+	email varchar(100),
+	site varchar(100),
+	localizacao varchar(255)
 );
 create table contrato_publicidade
 (
@@ -100,3 +107,51 @@ create table contado
 	email_contato varchar(255) not null unique,
 	status varchar(1) not null
 );
+
+create table pais
+(
+	id_pais serial not null primary key,
+	nome_pais varchar(30) not null,
+	sigla varchar(2)
+);
+
+create table estado
+(
+	id_estado serial not null primary key,
+	id_pais int not null references pais(id_pais),
+	nome_estado varchar(30) not null,
+	sigla varchar(2)
+);
+
+create table cidade
+(
+	id_cidade serial not null primary key,
+	id_estado int not null references estado(id_estado),
+	nome_cidade varchar(30) not null
+);
+
+create table bairros
+(
+	id_bairros serial not null primary key,
+	id_cidade int not null references cidade(id_cidade),
+	nome_bairro varchar(30) not null
+);
+
+create table rua
+(
+	id_rua serial not null primary key,
+	id_bairro int not null references bairros(id_bairros),
+	nome_rua varchar(30) not null
+);
+
+alter table empresa add id_rua int;
+alter table empresa add numero varchar(5);
+alter table empresa add facebook varchar(255);
+alter table empresa add instagram varchar(255);
+alter table empresa add email varchar(100);
+alter table empresa add localizacao varchar(255);
+alter table empresa add site varchar(100);
+
+
+
+
