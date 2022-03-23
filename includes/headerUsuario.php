@@ -99,6 +99,11 @@ if ($_SESSION['tipo_usuario'] == 'ADMINISTRADOR') {
                             <a href="locais_cad.php" class="dropdown-item">Locais</a>
                             <a href="empresa_cad.php" class="dropdown-item">Empresa</a>
                             <a href="contrato_cad.php" class="dropdown-item">Contrato</a>
+                            <a href="pais_cad.php" class="ropdown-item">Pais</a>
+                            <a href="estado_cad.php" class="ropdown-item">Estado</a>
+                            <a href="cidade_cad.php" class="ropdown-item">Cidade</a>
+                            <a href="bairro_cad.php" class="ropdown-item">Bairro</a>
+                            <a href="rua_cad.php" class="ropdown-item">Rua</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -111,6 +116,11 @@ if ($_SESSION['tipo_usuario'] == 'ADMINISTRADOR') {
                             <a href="locais_pesq.php" class="dropdown-item">Locais</a>
                             <a href="empresa_pesq.php" class="dropdown-item">Empresa</a>
                             <a href="contrato_pesq.php" class="dropdown-item">Contrato</a>
+                            <a href="pais_pesq.php" class="ropdown-item">Pais</a>
+                            <a href="estado_pesq.php" class="ropdown-item">Estado</a>
+                            <a href="cidade_pesq.php" class="ropdown-item">Cidade</a>
+                            <a href="bairro_pesq.php" class="ropdown-item">Bairro</a>
+                            <a href="rua_pesq.php" class="ropdown-item">Rua</a>
                         </div>
                     </div>
                     <a href="$" class="nav-item nav-link">Contato</a>

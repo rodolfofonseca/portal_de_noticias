@@ -6,6 +6,13 @@ class Empresa{
     private $whatsapp;
     private $observacoes;
     private $status;
+    private $rua;
+    private $numero;
+    private $facebook;
+    private $instagram;
+    private $email;
+    private $locaizacao;
+    private $site;
     public function __construct(){}
     public function setIdEmpresa($id_empresa){
         $this->id_empresa = $id_empresa;
@@ -42,6 +49,48 @@ class Empresa{
     }
     public function getObservacao(){
         return $this->observacoes;
+    }
+    public function setRua($rua){
+        $this->rua = $rua;
+    }
+    public function getRua(){
+        return $this->rua;
+    }
+    public function setNumero($numero){
+        $this->numero = $numero;
+    }
+    public function getNumero(){
+        return $this->numero;
+    }
+    public function setFacebook($facebook){
+        $this->facebook = $facebook;
+    }
+    public function getFacebook(){
+        return $this->facebook;
+    }
+    public function setInstagram($instagram){
+        $this->instagram = $instagram;
+    }
+    public function getInstagram(){
+        return $this->instagram;
+    }
+    public function setEmail($email){
+        $this->email = $email;
+    }
+    public function getEmail(){
+        return $this->email;
+    }
+    public function setLocalizacao($localizacao){
+        $this->locaizacao = $localizacao;
+    }
+    public function getLocalizacao(){
+        return $this->locaizacao;
+    }
+    public function setSite($site){
+        $this->site = $site;
+    }
+    public function getSite(){
+        return $this->site;
     }
 }
 ?>

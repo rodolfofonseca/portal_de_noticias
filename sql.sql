@@ -151,7 +151,3 @@ alter table empresa add instagram varchar(255);
 alter table empresa add email varchar(100);
 alter table empresa add localizacao varchar(255);
 alter table empresa add site varchar(100);
-
-
-
-
