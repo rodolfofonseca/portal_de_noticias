@@ -20,10 +20,10 @@ class Estado{
     public function getNomeEstado(){
         return $this->nomeEstado;
     }
-    public function setSiglaEstado($siglaEstado){
+    public function setSigla($siglaEstado){
         $this->siglaEstado = $siglaEstado;
     }
-    public function getSiglaEstado(){
+    public function getSigla(){
         return $this->siglaEstado;
     }
     public function setPais($pais)

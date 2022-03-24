@@ -14,8 +14,8 @@ class RuaCtr
     public function Salvar($model)
     {
         try {
-            $dados = array();
-            return $this->dao->Salvar('', '', $dados);
+            $dados = array($model->getBairro()->getIdBairro(), $model->getNomeRua());
+            return $this->dao->Salvar('rua', 'id_bairro, nome_rua', $dados);
         } catch (Exception $ex) {
             $this->logNoSistema->EscreverArquivo('logNoSistema.txt', $ex->getMessage());
             return false;
@@ -24,9 +24,9 @@ class RuaCtr
     public function Alterar($model)
     {
         try {
-            $dados = array();
-            $campos = array();
-            return $this->dao->Alterar('', $campos, $dados, '');
+            $dados = array($model->getBairro()->getIdBairro(), $model->getNomeRua(), $model->getIdRua());
+            $campos = array('id_bairro', 'nome_rua');
+            return $this->dao->Alterar('rua', $campos, $dados, 'id_rua');
         } catch (Exception $ex) {
             $this->logNoSistema->EscreverArquivo('logNoSistema.txt', $ex->getMessage());
             return false;
