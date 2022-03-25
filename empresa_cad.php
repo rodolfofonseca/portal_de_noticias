@@ -1,14 +1,15 @@
 <?php
 require_once 'includes/headerUsuario.php';
 require_once 'controller/modelos/Empresa.php';
+require_once 'controller/modelos/Rua.php';
 require_once 'controller/EmpresaCtr.php';
 require_once 'controller/utilidades/LogDoSistema.php';
+$controller = new EmpresaCtr();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST)) {
         $logDoSistema = new LogDoSistema();
         try {
             $model = new Empresa();
-            $controller = new EmpresaCtr();
             $model->setNomeEmpresa((string) strtoupper($_POST['nome_empresa']));
             $model->setObservacao((string) $_POST['observacao']);
             $model->setTelefoneContato((string) $_POST['telefone']);
@@ -68,6 +69,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     }
+    function pesquisaEstado(){
+        let estado = document.querySelector('#estado').innerHTML;
+        let select = document.querySelector('#pais');
+        let valor = select.options[select.selectedIndex].value;
+        document.cookie = 'pais='+valor;
+        <?php
+        $campo = (string) '';
+        if(empty($_COOKIE['pais']) == false){
+            $identificador = $_COOKIE['pais'];
+            $retorno = $controller->Pesquisar("select * from estado where id_pais = '".$identificador."';");
+            if(empty($retorno) == false){
+                foreach($retorno as $estado){
+                    $campo = $campo."<option value='".$estado['id_estado']."'>".$estado['nome_estado']."</option>";
+                }
+            }
+        }
+        ?>
+        estado = "<?php echo $campo; ?>";
+        document.querySelector('#estado').innerHTML = estado;
+    }
+    function pesquisaCidade(){
+        let cidade = document.querySelector('#cidade').innerHTML;
+        let select = document.querySelector('#estado');
+        let valor = select.options[select.selectedIndex].value;
+        document.cookie = 'estado='+valor;
+        <?php
+        $campo = (string) '';
+        if(empty($_COOKIE['estado']) == false){
+            $identificador = $_COOKIE['estado'];
+            $retorno = $controller->Pesquisar("select * from cidade where id_estado = '".$identificador."';");
+            if(empty($retorno) == false){
+                foreach($retorno as $cidade){
+                    $campo = $campo."<option value='".$cidade['id_cidade']."'>".$cidade['nome_cidade']."</option>";
+                }
+            }
+        }
+        ?>
+        cidade = "<?php echo $campo; ?>";
+        document.querySelector('#cidade').innerHTML = cidade;
+    }
+    function pesquisaBairro(){
+        let bairro = document.querySelector('#bairro').innerHTML;
+    }
 </script>
 <div class="container-fluid py-3">
     <div class="container">
@@ -117,6 +161,91 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <div class="from-group">
+                                    <label for="pais">Pais</label>
+                                    <select name="pais" id="pais" class="form-control" onblur="pesquisaBairro(this, '#estado');">
+                                        <option value="0">PAÍS</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="from-group">
+                                    <label for="estado">Estado</label>
+                                    <select name="estado" id="estado" class="form-control">
+                                        <option value="0">ESTADO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="from-group">
+                                    <label for="cidade">Cidade</label>
+                                    <select name="cidade" id="cidade" class="form-control">
+                                        <option value="0">CIDADE</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <div class="from-group">
+                                    <label for="bairro">Bairro</label>
+                                    <select name="bairro" id="bairro" class="form-control">
+                                        <option value="0">BAIRRO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="from-group">
+                                    <label for="rua">Rua</label>
+                                    <select name="rua" id="rua" class="form-control">
+                                        <option value="0">RUA</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="from-group">
+                                    <label for="numero">Número</label>
+                                    <input type="text" name="numero" id="numero" placeholder="38A" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <div class="coltrol-group">
+                                    <label for="facebook">Facebook</label>
+                                    <input type="text" name="facebook" id="facebook" placeholder="Facebook" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="coltrol-group">
+                                    <label for="instagram">Instagram</label>
+                                    <input type="text" name="instagram" id="instagram" placeholder="Instagram" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="coltrol-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" name="email" id="email" placeholder="Email" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="coltrol-group">
+                                    <label for="localizacao">Localização</label>
+                                    <input type="text" name="localizacao" id="localizacao" placeholder="Localizacao" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="coltrol-group">
+                                    <label for="site">Site</label>
+                                    <input type="text" name="site" id="site" placeholder="Site" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="control-group">
