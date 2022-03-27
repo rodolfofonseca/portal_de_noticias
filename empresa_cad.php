@@ -10,11 +10,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $logDoSistema = new LogDoSistema();
         try {
             $model = new Empresa();
+            $rua = new Rua();
             $model->setNomeEmpresa((string) strtoupper($_POST['nome_empresa']));
             $model->setObservacao((string) $_POST['observacao']);
             $model->setTelefoneContato((string) $_POST['telefone']);
             $model->setWhatsapp((string) $_POST['whatsapp']);
             $model->setStatus((string) $_POST['status']);
+            $rua->setIdRua((int) $_POST['rua']);
+            $model->setRua($rua);
+            $model->setNumero((string) $_POST['numero']);
+            $model->setFacebook((string) $_POST['facebook']);
+            $model->setInstagram((string) $_POST['instagram']);
+            $model->setEmail((string) $_POST['email']);
+            $model->setLocalizacao((string) $_POST['localizacao']);
+            $model->setSite((string) $_POST['site']);
+            if(isset($_FILES['imagem']['name']) && $_FILES['imagem']['error'] == 0){
+                $nome_imagem = (string) 'img/empresas/'.$model->getNomeEmpresa();
+                $arquivo_tmp = $_FILES["imagem"]['tmp_name'];
+                $nome_atual = (string) $_FILES['imagem']['name'];
+                $extensao = strchr($nome_atual, '.');
+                $extensao = strtolower($extensao);
+                if(strstr('.jpg;.jpeg;.gif;.png', $extensao)){
+                    $nome_imagem = (string) $nome_imagem.$extensao;
+                    if(@move_uploaded_file($arquivo_tmp, $nome_imagem)){
+                        $model->setImagem($nome_imagem);
+                    }
+                }
+            }
             if ($controller->Salvar($model)) {
 ?>
                 <script>
@@ -54,19 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 text: 'Número do whatsapp inválido!',
                 footer: 'Arrume por favor!'
             });
-        }
-
-        function validarTelefoneFixo() {
-            let numero = document.getElementById('telefone').value;
-            let retorno = validarTelefone(numero);
-            if (retorno == false) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Atenção',
-                    text: 'Número do telefone inválido!',
-                    footer: 'Arrume por favor!'
-                });
-            }
         }
     }
     function pesquisaEstado(){
@@ -111,6 +120,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     function pesquisaBairro(){
         let bairro = document.querySelector('#bairro').innerHTML;
+        let select = document.querySelector('#cidade');
+        let valor = select.options[select.selectedIndex].value;
+        document.cookie = 'cidade='+valor;
+        <?php
+        $campo = (string) '';
+        if(empty($_COOKIE['cidade']) == false){
+            $identificador = (string) $_COOKIE['cidade'];
+            $retorno = $controller->Pesquisar("select * from bairros where id_cidade = '".$identificador."';");
+            if(empty($retorno) == false){
+                foreach($retorno as $bairro){
+                    $campo = $campo."<option value='".$bairro['id_bairros']."'>".$bairro['nome_bairro']."</option>";
+                }
+            }
+        }
+        ?>
+        bairro = "<?php echo $campo; ?>";
+        document.querySelector('#bairro').innerHTML = bairro;
+    }
+    function pesquisaRua(){
+        let rua = document.querySelector('#cidade').innerHTML;
+        let select = document.querySelector('#bairro');
+        let valor = select.options[select.selectedIndex].value;
+        document.cookie = 'bairro='+valor;
+        <?php
+        $campo = (string) '';
+        if(empty($_COOKIE['bairro']) == false){
+            $identificador = (string) $_COOKIE['bairro'];
+            $retorno = $controller->Pesquisar("select * from rua where id_bairro = '".$identificador."' order by nome_rua;");
+            if(empty($retorno) == false){
+                foreach($retorno as $rua){
+                    $campo = $campo."<option value='".$rua['id_rua']."'>".$rua['nome_rua']."</option>";
+                }
+            }
+        }
+        ?>
+        rua = "<?php echo $campo; ?>";
+        document.querySelector('#rua').innerHTML = rua;
     }
 </script>
 <div class="container-fluid py-3">
@@ -121,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="row">
             <div class="col-md-12">
                 <div class="contact-form bg-light mb-3" style="padding: 30px;">
-                    <form method="POST" accept="empresa_cad.php">
+                    <form method="POST" accept="empresa_cad.php"enctype="multipart/form-data" >
                         <div class="form-row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -162,18 +208,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="imagem">Imagem</label>
+                                    <input type="file" name="imagem" placeholder="imagem" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col-md-4">
                                 <div class="from-group">
                                     <label for="pais">Pais</label>
-                                    <select name="pais" id="pais" class="form-control" onblur="pesquisaBairro(this, '#estado');">
-                                        <option value="0">PAÍS</option>
+                                    <select name="pais" id="pais" class="form-control" onblur="pesquisaEstado();">
+                                        <?php
+                                        $pesquisa = $controller->Pesquisar("select * from pais order by nome_pais;");
+                                        if(empty($pesquisa) == false){
+                                            foreach($pesquisa as $retorno){
+                                                ?>
+                                                <option value="<?php echo $retorno['id_pais']; ?>"><?php echo $retorno['nome_pais']; ?></option>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="from-group">
                                     <label for="estado">Estado</label>
-                                    <select name="estado" id="estado" class="form-control">
+                                    <select name="estado" id="estado" class="form-control" onblur="pesquisaCidade();">
                                         <option value="0">ESTADO</option>
                                     </select>
                                 </div>
@@ -181,7 +244,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="col-md-4">
                                 <div class="from-group">
                                     <label for="cidade">Cidade</label>
-                                    <select name="cidade" id="cidade" class="form-control">
+                                    <select name="cidade" id="cidade" class="form-control" onblur="pesquisaBairro();">
                                         <option value="0">CIDADE</option>
                                     </select>
                                 </div>
@@ -191,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="col-md-4">
                                 <div class="from-group">
                                     <label for="bairro">Bairro</label>
-                                    <select name="bairro" id="bairro" class="form-control">
+                                    <select name="bairro" id="bairro" class="form-control" onblur="pesquisaRua();">
                                         <option value="0">BAIRRO</option>
                                     </select>
                                 </div>

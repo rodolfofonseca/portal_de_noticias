@@ -13,6 +13,7 @@ class Empresa{
     private $email;
     private $locaizacao;
     private $site;
+    private $imagem;
     public function __construct(){}
     public function setIdEmpresa($id_empresa){
         $this->id_empresa = $id_empresa;
@@ -91,6 +92,12 @@ class Empresa{
     }
     public function getSite(){
         return $this->site;
+    }
+    public function setImagem($imagem){
+        $this->imagem = $imagem;
+    }
+    public function getImagem(){
+        return $this->imagem;
     }
 }
 ?>

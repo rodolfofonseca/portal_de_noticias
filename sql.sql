@@ -64,7 +64,8 @@ create table empresa
 	instagram varchar(255),
 	email varchar(100),
 	site varchar(100),
-	localizacao varchar(255)
+	localizacao varchar(500),
+	imagem text not null
 );
 create table contrato_publicidade
 (
@@ -144,10 +145,29 @@ create table rua
 	nome_rua varchar(30) not null
 );
 
-alter table empresa add id_rua int;
+/*alter table empresa add id_rua int;
 alter table empresa add numero varchar(5);
 alter table empresa add facebook varchar(255);
 alter table empresa add instagram varchar(255);
 alter table empresa add email varchar(100);
 alter table empresa add localizacao varchar(255);
 alter table empresa add site varchar(100);
+alter table empresa add imagem text;*/
+
+create table cidade_previsao
+(
+	id_cidade_previsao serial not null primary key,
+	id_cidade int not null references cidade(id_cidade),
+	codigo varchar(10) not null
+);
+
+create table previsao
+(
+	id_previsao serial not null primary key,
+	id_cidade_previsao int not null references cidade_previsao(id_cidade_previsao),
+	tempo varchar(50) not null,
+	nascer_sol varchar(8) not null,
+	por_sol varchar(8) not null,
+	velocidade_vento numeric(6),
+	imagem int not null
+);

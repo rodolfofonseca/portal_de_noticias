@@ -123,6 +123,7 @@ $dataSistema = new Data();
                         }
                     }
                     ?>
+                    <a href="empresas.php" class="nav-item nav-link">Empresas</a>
                 </div>
                 <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
                     <input type="text" class="form-control" placeholder="Pesquisar">
