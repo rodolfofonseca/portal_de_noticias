@@ -22,8 +22,3 @@ whatsapp
 e localização se tiver
 
 finalizar pesquisa e alteração de contratos
-
-26/03/2022-11:16:24--SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type integer: "10t"
-LINE 1: select * from empresa where id_empresa = '10t';
-                                                 ^
-26/03/2022-18:30:02--SQLSTATE[22001]: String data, right truncated: 7 ERROR:  value too long for type character varying(255)

@@ -125,9 +125,10 @@ if (empty($retorno_noticias) == false) {
                             </div>
                         </div>
                     </div>
+                                <?php require_once './includes/redesSociais.php'; ?>
                 </div>
             </div>
-    <?php
+    <?php 
     }
 }
 require_once 'includes/footer.php';

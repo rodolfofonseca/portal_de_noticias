@@ -16,9 +16,23 @@
         <div class="pb-3">
         <div class="bg-light py2 px-4 mb-3">
             <h3 class="m-0">Previsão do tempo</h3>
-            <p>
-                Previsão do tempo
-            </p>
+            <br/>
+            <?php
+            $cidadePrevisao = new CidadePrevisaoCtr();
+            $retorno = $cidadePrevisao->Pesquisar("select previsao.tempo, previsao.nascer_sol, previsao.por_sol, 
+            previsao.velocidade_vento,previsao.imagem, previsao.umidade, cidade.nome_cidade,  estado.sigla, previsao.temperatura from estado, cidade, cidade_previsao, previsao  where estado.id_estado = cidade.id_estado and cidade_previsao.id_cidade = cidade.id_cidade and previsao.id_cidade_previsao = cidade_previsao.id_cidade limit 5;");
+            if(empty($retorno) == false){
+                foreach($retorno as $previsao){
+                    ?>
+                    <p><?php echo $previsao['nome_cidade'].'/'.$previsao['sigla']?> <strong><?php echo $previsao['temperatura']; ?></strong></p>
+                    <p><?php echo $previsao['tempo']; ?></p>
+                    <p>Velocidade do Vento: <?php echo $previsao['velocidade_vento'].' KM/H'; ?></p>
+                    <p>Umidade do ar: <?php echo $previsao['umidade'].' %'; ?></p>
+                    <p><img src="img/clima/<?php echo $previsao['imagem']; ?>.png" width="250px" height="250px"/></p>
+                    <?php
+                }
+            }
+            ?>
         </div>
     </div>
     </div>

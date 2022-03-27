@@ -14,7 +14,7 @@ class CidadePrevisao{
         return $this->idCidadePrevisao;
     }
     public function setCidade($cidade){
-        $this->cidde = $cidade;
+        $this->cidade = $cidade;
     }
     public function getCidade(){
         return $this->cidade;

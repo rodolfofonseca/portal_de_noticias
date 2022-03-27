@@ -123,6 +123,13 @@ if ($_SESSION['tipo_usuario'] == 'ADMINISTRADOR') {
                             <a href="rua_pesq.php" class="dropdown-item">Rua</a>
                         </div>
                     </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tempo</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="cidade_previsao_cad.php" class="dropdown-item">Cadastrar Cidade</a>
+                            <a href="cidade_previsao_pesq.php" class="dropdown-item">Pesquisar Cidade</a>
+                        </div>
+                    </div>
                     <a href="$" class="nav-item nav-link">Contato</a>
                 </div>
                 <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">

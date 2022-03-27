@@ -5,6 +5,7 @@ include_once 'controller/MenuCtr.php';
 include_once 'controller/CategoriaCtr.php';
 include_once 'controller/NoticiasCtr.php';
 include_once 'controller/ParagrafoCtr.php';
+include_once 'controller/CidadePrevisaoCtr.php';
 $dataSistema = new Data();
 ?>
 <!DOCTYPE html>

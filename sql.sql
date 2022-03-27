@@ -169,5 +169,7 @@ create table previsao
 	nascer_sol varchar(8) not null,
 	por_sol varchar(8) not null,
 	velocidade_vento numeric(6),
-	imagem int not null
+	imagem varchar(3) not null,
+	umidade int,
+	temperatura varchar(5)
 );
