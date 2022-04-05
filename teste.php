@@ -7,7 +7,7 @@ var today=new Date();
 var h=today.getHours();
 var m=today.getMinutes();
 var s=today.getSeconds();
-// adicione um zero na frente de números<10
+// adicione um zero na frente de números<10...
 m=checkTime(m);
 s=checkTime(s);
 document.getElementById('txt').innerHTML=h+":"+m+":"+s;
