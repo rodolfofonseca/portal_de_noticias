@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $model->setCategoria($categoria);
             $tituloDestaque->setDataInicio((string) $_POST['data_inicio']);
             $tituloDestaque->setHoraInicio((int) $_POST['hora_inicio']);
-            $tituloDestaque->setDataFim((string) $_POST['data_fim']);
-            $tituloDestaque->setHoraFim((int) $_POST['hora_fim']);
+            /*$tituloDestaque->setDataFim((string) $_POST['data_fim']);
+            $tituloDestaque->setHoraFim((int) $_POST['hora_fim']);*/
             $tituloDestaque->setMateria($model);
             $model->setLinkMateria((string) strtolower($_POST['link_materia']));
             $model->setStatus($_POST['status']);

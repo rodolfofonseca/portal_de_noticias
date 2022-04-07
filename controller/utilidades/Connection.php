@@ -11,7 +11,7 @@ class Connection{
     public static function Conectar(){
         if(null == self::$cont){
             try{
-                self::$cont = new PDO("pgsql:host=localhost; port=5432; dbname=portal_de_noticias;user=postgres;password=crydo879");
+                self::$cont = new PDO("pgsql:host=localhost; port=5434; dbname=portal_de_noticias;user=postgres;password=crydo879");
             }catch(PDOException $ex){
                 die($ex->getMessage());
             }

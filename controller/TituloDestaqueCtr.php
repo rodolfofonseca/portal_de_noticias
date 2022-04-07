@@ -12,8 +12,8 @@ class TituloDestaqueCtr{
     }
     public function Salvar($model){
         try{
-            $dados = array($model->getMateria()->getIdNoticia(), $model->getDataInicio(), $model->getDataFim(), $model->getHoraInicio(), $model->getHoraFim(), $model->getStatus());
-            return $this->dao->Salvar('titulo_destaque', 'id_materia, data_inicio, data_fim, hora_inicio, hora_fim, status', $dados);
+            $dados = array($model->getMateria()->getIdNoticia(), $model->getDataInicio(), $model->getDataFim(), $model->getStatus());
+            return $this->dao->Salvar('titulo_destaque', 'id_materia, data_inicio, data_fim, status', $dados);
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
             return false;
@@ -21,8 +21,8 @@ class TituloDestaqueCtr{
     }
     public function Alterar($model){
         try{
-            $dados = array($model->getMateria()->getIdNoticia(), $model->getDataInicio(), $model->getDataFim(), $model->getHoraInicio(), $model->getHoraFim(), $model->getStatus(),$model->getIdTituloDestaque());
-            $campos = array('id_materia', 'data_inicio', 'data_fim', 'hora_inicio', 'hora_fim', 'status');
+            $dados = array($model->getMateria()->getIdNoticia(), $model->getDataInicio(), $model->getDataFim(), $model->getStatus(),$model->getIdTituloDestaque());
+            $campos = array('id_materia', 'data_inicio', 'data_fim', 'status');
             return $this->dao->Alterar('titulo_destaque', $campos, $dados, 'id_titulo');
         }catch(Exception $ex){
             $this->logDoSistema->EscreverArquivo('logDoSistema.txt', $ex->getMessage());
